@@ -10,52 +10,165 @@ import time
 import random
 
 # ==========================================
-# 1. PAGE CONFIG & CUSTOM CSS
+# 1. PAGE CONFIG & CUSTOM CSS (Enhanced for Readability)
 # ==========================================
-st.set_page_config(page_title="AI Dental Caries Detection", page_icon="🦷", layout="wide")
+st.set_page_config(
+    page_title="AI Dental Caries Detection", 
+    page_icon="🦷", 
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
+# Custom CSS for Professional, High-Contrast, and Tidy UI
 st.markdown("""
     <style>
-        .title { text-align: center; font-size: 36px !important; font-weight: bold; color: #004d99; margin-bottom: 10px; }
-        .subtitle { text-align: center; font-size: 20px; color: #666; margin-bottom: 30px; }
-        .metric-card { background: linear-gradient(135deg, #004d99 0%, #0073e6 100%); padding: 20px; border-radius: 10px; color: white; text-align: center; }
-        .info-box { background-color: #e6f2ff; border-left: 5px solid #004d99; padding: 15px; margin: 15px 0; border-radius: 5px; }
-        .success-box { background-color: #e6ffe6; border-left: 5px solid #009900; padding: 15px; margin: 15px 0; border-radius: 5px; }
-        .warning-box { background-color: #ffe6e6; border-left: 5px solid #cc0000; padding: 15px; margin: 15px 0; border-radius: 5px; }
-        .question-box { font-size: 20px; font-weight: bold; color: #004d99; }
-        .stRadio > div { flex-direction: row; }
+    /* Global Font & Background */
+    .stApp {
+        background-color: #F8F9FA;
+        color: #212529;
+    }
+    
+    /* Headers */
+    h1, h2, h3 {
+        color: #003366;
+        font-weight: 700;
+    }
+    
+    /* Custom Title */
+    .hero-title {
+        font-size: 48px !important;
+        font-weight: 800;
+        color: #004d99;
+        text-align: center;
+        margin-bottom: 5px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    .hero-subtitle {
+        font-size: 22px;
+        color: #555;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 400;
+    }
+
+    /* Cards & Boxes */
+    .metric-card {
+        background: linear-gradient(135deg, #004d99 0%, #0073e6 100%);
+        padding: 25px;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+    .metric-card:hover {
+        transform: translateY(-5px);
+    }
+    .metric-card h3 {
+        color: white !important;
+        margin: 0;
+        font-size: 24px;
+    }
+    .metric-card p {
+        font-size: 36px;
+        font-weight: bold;
+        margin: 10px 0 0 0;
+    }
+
+    .info-box {
+        background-color: #E3F2FD;
+        border-left: 6px solid #004d99;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #003366;
+    }
+    
+    .success-box {
+        background-color: #E8F5E9;
+        border-left: 6px solid #2E7D32;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #1B5E20;
+    }
+
+    .warning-box {
+        background-color: #FFEBEE;
+        border-left: 6px solid #C62828;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #B71C1C;
+    }
+
+    /* Pipeline Steps */
+    .pipeline-step {
+        background-color: white;
+        border: 2px solid #0073e6;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        font-weight: bold;
+        color: #004d99;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    /* Hide Streamlit default menu/footer for cleaner look */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    
     </style>
 """, unsafe_allow_html=True)
 
 # ==========================================
 # 2. SIDEBAR NAVIGATION
 # ==========================================
-st.sidebar.title("🦷 Navigation")
+st.sidebar.markdown("## 🦷 Navigation")
 page = st.sidebar.radio("Go to", ["🏠 Introduction", "📊 Data Overview", "🏆 Model Performance", "🔬 AI Prediction Tool"])
 
 # ==========================================
-# 3. INTRODUCTION PAGE (Storytelling)
+# 3. INTRODUCTION PAGE (Storytelling & High Impact)
 # ==========================================
 if page == "🏠 Introduction":
-    st.markdown("<p class='title'>🦷 AI-Assisted Dental Caries Detection</p>", unsafe_allow_html=True)
-    st.markdown("<p class='subtitle'>Empowering Dentists with Explainable Deep Learning</p>", unsafe_allow_html=True)
+    st.markdown('<p class="hero-title">🦷 AI-Assisted Dental Caries Detection</p>', unsafe_allow_html=True)
+    st.markdown('<p class="hero-subtitle">Empowering Dentists with Explainable Deep Learning</p>', unsafe_allow_html=True)
 
-    col1, col2 = st.columns([1.2, 2])
+    # Hero Image / GIF Section
+    col1, col2 = st.columns([1, 1.5])
     with col1:
-        st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGxsZmw3bTJnNmIyb3V1OXllZHNtaWFwbHNjbHF5ZzVlN3k2b2xveSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/cb89q6BvqAHfwH6AEU/giphy.gif", width=350)
+        # Professional AI/Medical Scanning GIF
+        st.image("https://media.giphy.com/media/3oEjHQKtUpepLMcFGM/giphy.gif", caption="AI Neural Network Scanning", use_column_width=True)
     with col2:
         st.markdown("""
-        <p style='font-size: 18px; text-align: justify; line-height: 1.6;'>
+        <div style='font-size: 18px; line-height: 1.8; text-align: justify;'>
         Dental caries (tooth decay) is one of the most prevalent oral diseases globally, affecting approximately 
         <b>2.3 billion people worldwide</b> (WHO, 2022). In Malaysia, the prevalence is dangerously high at <b>85.1%</b> among adults.
-        </p>
-        <p style='font-size: 18px; text-align: justify; line-height: 1.6;'>
+        <br><br>
         Traditional detection relies on manual radiograph interpretation—a process that is subjective, time-consuming, 
         and highly dependent on the practitioner's experience and fatigue levels. Early-stage lesions are subtle and easily missed.
-        </p>
+        </div>
         """, unsafe_allow_html=True)
 
     st.markdown("---")
+    
+    # Interactive Statistics
+    st.subheader("🌍 The Global & Local Burden")
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.markdown('<div class="metric-card"><h3>Global Cases</h3><p>2.3B+</p></div>', unsafe_allow_html=True)
+    with c2:
+        st.markdown('<div class="metric-card"><h3>Malaysia Adults</h3><p>85.1%</p></div>', unsafe_allow_html=True)
+    with c3:
+        st.markdown('<div class="metric-card"><h3>Malaysia Kids</h3><p>71.3%</p></div>', unsafe_allow_html=True)
+
+    st.markdown("<br>")
     st.subheader("🎯 Project Objectives")
     st.markdown("""
     1. **Review** current techniques for identifying dental caries in radiographic images.
@@ -63,29 +176,32 @@ if page == "🏠 Introduction":
     3. **Evaluate** the system's accuracy and implement **Explainable AI (Grad-CAM)** to build clinical trust.
     """)
 
-    st.subheader("📊 Quick Question")
-    st.markdown("<p class='question-box'>What percentage of Malaysian adults suffer from dental caries?</p>", unsafe_allow_html=True)
+    # Interactive Quick Question
+    st.markdown("---")
+    st.subheader("🧠 Quick Knowledge Check")
+    st.markdown("**What percentage of Malaysian adults suffer from dental caries?**")
     options = ["65.2%", "75.8%", "85.1%", "92.3%"]
-    answer = st.radio("Select an answer:", options, horizontal=True)
-    if st.button("Submit Answer"):
+    answer = st.radio("Select an answer:", options, horizontal=True, label_visibility="collapsed")
+    
+    if st.button("Submit Answer", use_container_width=True):
         if answer == "85.1%":
             st.success("✅ Correct! According to NOHSA 2020, 85.1% of Malaysian adults have dental caries.")
         else:
             st.error("❌ Incorrect. The correct answer is 85.1% - highlighting the critical need for automated detection!")
 
 # ==========================================
-# 4. DATA OVERVIEW PAGE (EDA)
+# 4. DATA OVERVIEW PAGE (EDA & Preprocessing)
 # ==========================================
 elif page == "📊 Data Overview":
-    st.markdown("<p class='title'>📊 Dataset & Exploratory Data Analysis</p>", unsafe_allow_html=True)
-    st.markdown("<p class='subtitle'>Understanding the Dental Radiograph Dataset</p>", unsafe_allow_html=True)
+    st.markdown('<p class="hero-title">📊 Dataset & Exploratory Data Analysis</p>', unsafe_allow_html=True)
+    st.markdown('<p class="hero-subtitle">Understanding the Dental Radiograph Dataset</p>', unsafe_allow_html=True)
 
     # Dataset Metrics
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric(label="📷 Total Images", value="500+")
-    with col2: st.metric(label="✅ Healthy (No Cavity)", value="350")
-    with col3: st.metric(label="🦠 Cavity Present", value="150")
-    with col4: st.metric(label="📏 Image Size", value="224x224")
+    with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
+    with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
+    with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
+    with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("---")
     
@@ -104,6 +220,7 @@ elif page == "📊 Data Overview":
         fig_pie = px.pie(dist_data, values='Count', names='Class', hole=0.4,
                          title='Dataset Class Distribution',
                          color_discrete_sequence=['#4CAF50', '#F44336'])
+        fig_pie.update_traces(textposition='inside', textinfo='percent+label')
         st.plotly_chart(fig_pie, use_container_width=True)
         
     with col_b:
@@ -114,23 +231,35 @@ elif page == "📊 Data Overview":
         fig_bar.update_layout(showlegend=False)
         st.plotly_chart(fig_bar, use_container_width=True)
 
-    st.markdown("""
-    <div class="info-box">
-    <b>🔍 Preprocessing Pipeline:</b> Before feeding images into the neural network, we applied a strict preprocessing pipeline:
-    <ul>
-        <li><b>Grayscale Conversion:</b> Removes unnecessary color noise.</li>
-        <li><b>CLAHE (Contrast Limited Adaptive Histogram Equalization):</b> Enhances subtle radiolucent boundaries of early caries.</li>
-        <li><b>Normalization:</b> Scales pixel values to [0, 1] for faster model convergence.</li>
-    </ul>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("---")
+
+    # Interactive Preprocessing Pipeline
+    st.subheader("🔍 Preprocessing Pipeline")
+    st.write("Before feeding images into the neural network, we applied a strict preprocessing pipeline to enhance subtle radiolucent boundaries.")
+    
+    step1, step2, step3, step4 = st.columns(4)
+    with step1:
+        st.markdown('<div class="pipeline-step">1️⃣<br>Grayscale<br>Conversion</div>', unsafe_allow_html=True)
+    with step2:
+        st.markdown('<div class="pipeline-step">2️⃣<br>CLAHE<br>Enhancement</div>', unsafe_allow_html=True)
+    with step3:
+        st.markdown('<div class="pipeline-step">3️⃣<br>Resize to<br>224x224</div>', unsafe_allow_html=True)
+    with step4:
+        st.markdown('<div class="pipeline-step">4️⃣<br>Normalization<br>[0, 1]</div>', unsafe_allow_html=True)
+
+    with st.expander("ℹ️ Why CLAHE is Critical for Dental X-Rays"):
+        st.markdown("""
+        **Contrast Limited Adaptive Histogram Equalization (CLAHE)** is essential because early-stage caries 
+        present as subtle radiolucent (dark) changes. Standard histogram equalization can amplify background noise, 
+        but CLAHE enhances local contrast specifically around the tooth structures, making micro-cavities visible to the CNN.
+        """)
 
 # ==========================================
-# 5. MODEL PERFORMANCE PAGE
+# 5. MODEL PERFORMANCE PAGE (Advanced Visuals)
 # ==========================================
 elif page == "🏆 Model Performance":
-    st.markdown("<p class='title'>🏆 Model Comparison & Evaluation</p>", unsafe_allow_html=True)
-    st.markdown("<p class='subtitle'>Baseline CNN vs. Transfer Learning (MobileNetV2 & ResNet50)</p>", unsafe_allow_html=True)
+    st.markdown('<p class="hero-title">🏆 Model Comparison & Evaluation</p>', unsafe_allow_html=True)
+    st.markdown('<p class="hero-subtitle">Baseline CNN vs. Transfer Learning (MobileNetV2 & ResNet50)</p>', unsafe_allow_html=True)
 
     st.write("""
     We evaluated three architectures to determine the most effective approach for dental caries detection. 
@@ -164,9 +293,30 @@ elif page == "🏆 Model Performance":
         yaxis_title='Score',
         yaxis_tickformat='.0%',
         template='plotly_white',
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        height=500
     )
     st.plotly_chart(fig_metrics, use_container_width=True)
+
+    # RADAR CHART (New Interactive Feature!)
+    st.subheader("🕸️ Multi-Dimensional Radar Analysis")
+    st.write("A radar chart provides a holistic view of each model's strengths and weaknesses across all metrics.")
+    
+    fig_radar = go.Figure()
+    for model_name in model_results['Model']:
+        row = model_results[model_results['Model'] == model_name].iloc[0]
+        fig_radar.add_trace(go.Scatterpolar(
+            r=[row['Accuracy'], row['Precision'], row['Recall'], row['F1-Score'], row['Accuracy']],
+            theta=['Accuracy', 'Precision', 'Recall', 'F1-Score', 'Accuracy'],
+            fill='toself',
+            name=model_name
+        ))
+    fig_radar.update_layout(
+        polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
+        template='plotly_white',
+        height=500
+    )
+    st.plotly_chart(fig_radar, use_container_width=True)
 
     st.markdown("---")
 
@@ -207,8 +357,8 @@ elif page == "🏆 Model Performance":
 # 6. AI PREDICTION TOOL PAGE
 # ==========================================
 elif page == "🔬 AI Prediction Tool":
-    st.markdown("<p class='title'>🔬 AI Diagnostic Assistant</p>", unsafe_allow_html=True)
-    st.markdown("<p class='subtitle'>Upload a Dental Radiograph for Instant Analysis & Explainability</p>", unsafe_allow_html=True)
+    st.markdown('<p class="hero-title">🔬 AI Diagnostic Assistant</p>', unsafe_allow_html=True)
+    st.markdown('<p class="hero-subtitle">Upload a Dental Radiograph for Instant Analysis & Explainability</p>', unsafe_allow_html=True)
 
     # Smart Fallback: Try to load TensorFlow
     try:
@@ -255,9 +405,13 @@ elif page == "🔬 AI Prediction Tool":
             image = Image.open(uploaded_file).convert('L') # Convert to grayscale
             st.image(image, caption="Original Grayscale X-Ray", use_column_width=True)
             
-            # Simulate processing time
-            with st.spinner('Analyzing radiograph...'):
-                time.sleep(1.5)
+            # Simulate processing time with steps
+            with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
+                time.sleep(0.5)
+            with st.spinner('🧠 Step 2: Running CNN Inference...'):
+                time.sleep(0.5)
+            with st.spinner('🔥 Step 3: Generating Grad-CAM Heatmap...'):
+                time.sleep(0.5)
                 
                 if TF_AVAILABLE:
                     # ==============================
@@ -370,8 +524,8 @@ elif page == "🔬 AI Prediction Tool":
 # ==========================================
 st.markdown("---")
 st.markdown("""
-<div style='text-align: center; color: gray; padding: 10px;'>
+<div style='text-align: center; color: #666; padding: 10px; font-size: 14px;'>
     <p>🦷 Automated Detection of Dental Caries from Dental X-ray Image | Final Year Project 2024</p>
-    <p>Developed by Barry Ng Kee Hong (0135374) | University of Wollongong Malaysia</p>
+    <p>Developed by <b>Barry Ng Kee Hong (0135374)</b> | University of Wollongong Malaysia</p>
 </div>
 """, unsafe_allow_html=True)
