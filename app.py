@@ -136,7 +136,7 @@ st.markdown("""
 # ==========================================
 # SIDEBAR NAVIGATION
 # ==========================================
-st.sidebar.title("🧭 Navigation")
+st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to", 
     ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
