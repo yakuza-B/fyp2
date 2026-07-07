@@ -136,10 +136,10 @@ st.markdown("""
 # ==========================================
 # SIDEBAR NAVIGATION
 # ==========================================
-st.sidebar.title("Navigation")
+st.sidebar.title("🧭 Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
+    [" Dashboard", "📂 Dataset", " AI Models", "📈 Results", " AI Diagnosis", "ℹ️ About"],
     label_visibility="collapsed",
     index=0
 )
@@ -205,7 +205,7 @@ if page == "🏠 Dashboard":
             st.error("❌ Incorrect. The correct answer is 85.1% - highlighting the critical need for automated detection!")
 
 # ==========================================
-# 📂 DATASET
+#  DATASET
 # ==========================================
 elif page == "📂 Dataset":
     st.markdown("### 📊 Dataset Overview & Preprocessing")
@@ -215,7 +215,7 @@ elif page == "📂 Dataset":
     with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
-    with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
+    with col4: st.metric(label=" Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### ⚖️ Class Distribution")
@@ -250,7 +250,9 @@ elif page == "📂 Dataset":
     st.markdown("### 🔬 Preprocessing Pipeline")
     st.write("Raw radiographs undergo strict standardization before model ingestion.")
     
-    step1, step2, step3, step4 = st.columns(4)
+    # CHANGED: Added spacer columns (space1, space2, space3) to create gaps between the boxes
+    step1, space1, step2, space2, step3, space3, step4 = st.columns([4, 1, 4, 1, 4, 1, 4])
+    
     with step1:
         st.markdown("""
         <div class="pipeline-step">
@@ -328,7 +330,7 @@ elif page == "🧠 AI Models":
     """)
 
 # ==========================================
-# 📈 RESULTS
+#  RESULTS
 # ==========================================
 elif page == "📈 Results":
     st.markdown("### 📊 Performance Evaluation & Threshold Optimization")
@@ -368,7 +370,7 @@ elif page == "📈 Results":
     st.plotly_chart(fig_metrics, use_container_width=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 🕸️ Radar Analysis")
+    st.markdown("### ️ Radar Analysis")
     st.write("Holistic view of model strengths across all evaluation dimensions.")
     
     fig_radar = go.Figure()
@@ -447,7 +449,7 @@ elif page == "🔬 AI Diagnosis":
             st.image(image, caption="Uploaded Radiograph", use_column_width=True)
             
             # Simulate processing time
-            with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
+            with st.spinner(' Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
             with st.spinner('🧠 Step 2: Running CNN Inference...'):
                 time.sleep(0.4)
@@ -516,7 +518,7 @@ elif page == "🔬 AI Diagnosis":
             confidence = prediction_prob if is_cavity else (1 - prediction_prob)
             
             st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown("### 🩺 Diagnostic Report")
+            st.markdown("###  Diagnostic Report")
             
             diag_col, cam_col = st.columns(2)
             
@@ -590,7 +592,7 @@ elif page == "ℹ️ About":
         """, unsafe_allow_html=True)
         
     with col2:
-        st.markdown("#### 🛠️ Technology ")
+        st.markdown("#### 🛠️ Technology Stack")
         st.markdown("""
         - **Language:** Python 3.11
         - **Deep Learning:** TensorFlow 2.15, Keras
