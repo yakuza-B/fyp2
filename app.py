@@ -3,8 +3,11 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-from PIL import Image
+from PIL import Image, ImageFilter, ImageDraw
+import cv2
 import os
+import time
+import random
 
 # ==========================================
 # PAGE CONFIG & CUSTOM CSS
@@ -21,7 +24,7 @@ st.markdown("""
     <style>
     /* Main Background */
     .stApp {
-        background-color: #f8f9fa;
+        background-color: #ffffff;
     }
     
     /* Headers */
@@ -117,24 +120,38 @@ st.markdown("""
 st.sidebar.title("🦷 Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    ["🏠 Introduction", "📊 Data Overview", "🏆 Model Performance", "🔬 AI Prediction Tool"]
+    ["🏠 Introduction", "📊 Data Overview", "🏆 Model Performance", " AI Prediction Tool"]
 )
 
 # ==========================================
 # INTRODUCTION PAGE
 # ==========================================
-if page == " Introduction":
+if page == "🏠 Introduction":
     st.markdown('<p class="hero-title">🦷 AI-Assisted Dental Caries Detection</p>', unsafe_allow_html=True)
     st.markdown('<p class="hero-subtitle">Empowering Dentists with Explainable Deep Learning</p>', unsafe_allow_html=True)
 
-    # Problem Statement Section
-    st.markdown("###  The Challenge")
-    st.markdown("""
-    Dental caries (tooth decay) is one of the most prevalent oral diseases globally, affecting approximately **2.3 billion people worldwide** (WHO, 2022). In Malaysia, the prevalence is dangerously high at **85.1%** among adults.
+    col1, col2 = st.columns([1, 1.5])
     
-    Traditional detection relies on manual radiograph interpretation—a process that is **subjective**, **time-consuming**, and highly dependent on the practitioner's experience and fatigue levels. Early-stage lesions are subtle and easily missed.
-    """)
+    with col1:
+        st.image(
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGxsZmw3bTJnNmIyb3V1OXllZHNtaWFwbHNjbHF5ZzVlN3k2b2xveSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/cb89q6BvqAHfwH6AEU/giphy.gif",
+            caption="AI Neural Network Scanning",
+            use_column_width=True
+        )
     
+    with col2:
+        st.markdown("""
+        <div style='font-size: 16px; line-height: 1.8;'>
+        <strong>Dental caries (tooth decay)</strong> is one of the most prevalent oral diseases globally, 
+        affecting approximately <strong>2.3 billion people worldwide</strong> (WHO, 2022). 
+        In Malaysia, the prevalence is dangerously high at <strong>85.1%</strong> among adults.
+        <br><br>
+        Traditional detection relies on manual radiograph interpretation—a process that is 
+        <strong>subjective</strong>, <strong>time-consuming</strong>, and highly dependent on the 
+        practitioner's experience and fatigue levels. Early-stage lesions are subtle and easily missed.
+        </div>
+        """, unsafe_allow_html=True)
+
     st.markdown("<br>", unsafe_allow_html=True)
     
     # Statistics Cards
@@ -168,7 +185,7 @@ if page == " Introduction":
     st.markdown("<br>", unsafe_allow_html=True)
     
     # Project Objectives
-    st.markdown("### 🎯 Project Objectives")
+    st.markdown("###  Project Objectives")
     st.markdown("""
     1. **Review** current techniques for identifying dental caries in radiographic images.
     2. **Develop** an AI-driven system utilizing Transfer Learning (CNNs) to detect caries from dental X-rays.
@@ -199,13 +216,13 @@ elif page == "📊 Data Overview":
     # Dataset Metrics
     col1, col2, col3, col4 = st.columns(4)
     with col1: 
-        st.metric(label="📷 Total Images", value="500+", delta="Curated")
+        st.metric(label=" Total Images", value="500+", delta="Curated")
     with col2: 
         st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: 
         st.metric(label="🦠 Cavity", value="150", delta="30%")
     with col4: 
-        st.metric(label=" Resolution", value="224x224", delta="Pixels")
+        st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -225,6 +242,7 @@ elif page == "📊 Data Overview":
                          title='Dataset Class Distribution',
                          color_discrete_sequence=['#4CAF50', '#F44336'])
         fig_pie.update_traces(textposition='inside', textinfo='percent+label')
+        fig_pie.update_layout(template='plotly_white')  # FIXED: White template
         st.plotly_chart(fig_pie, use_container_width=True)
         
     with col_b:
@@ -232,7 +250,7 @@ elif page == "📊 Data Overview":
                          title='Number of Images per Class',
                          color_discrete_sequence=['#4CAF50', '#F44336'],
                          text='Count')
-        fig_bar.update_layout(showlegend=False)
+        fig_bar.update_layout(showlegend=False, template='plotly_white')  # FIXED: White template
         st.plotly_chart(fig_bar, use_container_width=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -245,7 +263,7 @@ elif page == "📊 Data Overview":
     with step1:
         st.markdown("""
         <div style='background-color: #e3f2fd; border: 2px solid #2196f3; border-radius: 10px; padding: 15px; text-align: center;'>
-            <h3 style='color: #1976d2; margin: 0;'>1️⃣</h3>
+            <h3 style='color: #1976d2; margin: 0;'>1️</h3>
             <p style='margin: 10px 0; font-weight: 600;'>Grayscale<br>Conversion</p>
         </div>
         """, unsafe_allow_html=True)
@@ -271,7 +289,7 @@ elif page == "📊 Data Overview":
         </div>
         """, unsafe_allow_html=True)
 
-    with st.expander("️ Why CLAHE is Critical for Dental X-Rays"):
+    with st.expander("ℹ️ Why CLAHE is Critical for Dental X-Rays"):
         st.markdown("""
         **Contrast Limited Adaptive Histogram Equalization (CLAHE)** is essential because early-stage caries 
         present as subtle radiolucent (dark) changes. Standard histogram equalization can amplify background noise, 
@@ -316,9 +334,11 @@ elif page == "🏆 Model Performance":
         title='Model Performance Across Key Metrics',
         yaxis_title='Score',
         yaxis_tickformat='.0%',
-        template='plotly_white',
+        template='plotly_white',  # FIXED: White template
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-        height=500
+        height=500,
+        plot_bgcolor='white',  # FIXED: White background
+        paper_bgcolor='white'  # FIXED: White background
     )
     st.plotly_chart(fig_metrics, use_container_width=True)
 
@@ -337,8 +357,10 @@ elif page == "🏆 Model Performance":
         ))
     fig_radar.update_layout(
         polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
-        template='plotly_white',
-        height=500
+        template='plotly_white',  # FIXED: White template
+        height=500,
+        plot_bgcolor='white',  # FIXED: White background
+        paper_bgcolor='white'  # FIXED: White background
     )
     st.plotly_chart(fig_radar, use_container_width=True)
 
@@ -418,7 +440,7 @@ elif page == " AI Prediction Tool":
                 st.warning("⚠️ Model file not found. Running in Demo Mode.")
                 TF_AVAILABLE = False
         else:
-            st.warning("️ **Cloud Demo Mode** (AI Engine simulated)")
+            st.warning("☁️ **Cloud Demo Mode** (AI Engine simulated)")
             
         st.info("""
         **Model:** Custom CNN with Transfer Learning  
@@ -550,7 +572,7 @@ elif page == " AI Prediction Tool":
             </div>
             """, unsafe_allow_html=True)
             
-            st.info("👈 Please upload a dental radiograph in the left sidebar to begin analysis.")
+            st.info(" Please upload a dental radiograph in the left sidebar to begin analysis.")
 
 # ==========================================
 # FOOTER
@@ -558,7 +580,7 @@ elif page == " AI Prediction Tool":
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center; color: #666; padding: 20px; border-top: 2px solid #ddd; margin-top: 40px;'>
-    <p><strong>🦷 Automated Detection of Dental Caries from Dental X-ray Image</strong></p>
+    <p><strong> Automated Detection of Dental Caries from Dental X-ray Image</strong></p>
     <p>Final Year Project 2024 | University of Wollongong Malaysia</p>
     <p>Developed by <strong>Barry Ng Kee Hong (0135374)</strong></p>
 </div>
