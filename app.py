@@ -136,7 +136,7 @@ st.markdown("""
 # ==========================================
 # SIDEBAR NAVIGATION
 # ==========================================
-st.sidebar.title("🧭 Navigation")
+st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to", 
     ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
@@ -590,7 +590,7 @@ elif page == "ℹ️ About":
         """, unsafe_allow_html=True)
         
     with col2:
-        st.markdown("#### 🛠️ Technology Stack")
+        st.markdown("#### 🛠️ Technology ")
         st.markdown("""
         - **Language:** Python 3.11
         - **Deep Learning:** TensorFlow 2.15, Keras
