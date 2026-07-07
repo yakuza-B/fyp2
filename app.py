@@ -10,7 +10,7 @@ import time
 import random
 
 # ==========================================
-# 1. PAGE CONFIG & PROFESSIONAL MEDICAL THEME CSS
+# 1. PAGE CONFIG & DARK THEME CSS
 # ==========================================
 st.set_page_config(
     page_title="AI Dental Caries Detection System", 
@@ -21,59 +21,45 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* Global App Styling */
-    .stApp {
-        background-color: #FAFAFA;
-        color: #1C1C1C;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    
-    /* Headers & Typography - DARK COLORS */
-    h1, h2, h3, h4, h5, h6 {
-        color: #0A2540 !important;
-        font-weight: 700;
-        letter-spacing: -0.5px;
-    }
-    
-    /* Main text - DARK */
-    p, div, span, label {
-        color: #1C1C1C !important;
+    /* Force Dark Text on Dark Background */
+    h1, h2, h3, h4, p, div, span, label {
+        color: #FAFAFA !important;
     }
     
     /* App Header */
     .app-header {
         text-align: center;
         padding: 20px 0 10px 0;
-        border-bottom: 2px solid #E0E7FF;
+        border-bottom: 2px solid #334155;
         margin-bottom: 25px;
     }
     .app-header h1 {
         font-size: 32px !important;
-        color: #0A2540 !important;
+        color: #00E5FF !important;
         margin: 0 !important;
     }
     .app-header p {
         font-size: 16px;
-        color: #5A6C84 !important;
+        color: #94A3B8 !important;
         margin: 5px 0 0 0 !important;
     }
     
-    /* Metric Cards - WHITE TEXT ON GRADIENT */
+    /* Metric Cards (Dark Gradient) */
     .stat-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
         padding: 20px;
         border-radius: 12px;
-        border: 1px solid #E2E8F0;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border: 1px solid #334155;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         text-align: center;
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition: transform 0.2s;
     }
     .stat-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        border-color: #00E5FF;
     }
     .stat-card h3 {
-        color: white !important;
+        color: #94A3B8 !important;
         font-size: 14px !important;
         margin: 0 0 8px 0 !important;
         text-transform: uppercase;
@@ -82,72 +68,52 @@ st.markdown("""
     .stat-card p {
         font-size: 28px;
         font-weight: 700;
-        color: white !important;
+        color: #FAFAFA !important;
         margin: 0 !important;
     }
     
-    /* Info & Alert Boxes - DARK TEXT ON LIGHT BACKGROUNDS */
+    /* Info & Alert Boxes (Dark Mode) */
     .info-box {
-        background-color: #E3F2FD;
-        border-left: 5px solid #2196F3;
+        background-color: #1E293B;
+        border-left: 5px solid #3B82F6;
         padding: 18px 20px;
         margin: 18px 0;
         border-radius: 8px;
         font-size: 15px;
         line-height: 1.6;
-        color: #0C4A6E !important;
+        color: #E2E8F0 !important;
     }
     .success-box {
-        background-color: #E8F5E9;
-        border-left: 5px solid #4CAF50;
+        background-color: #1E293B;
+        border-left: 5px solid #10B981;
         padding: 18px 20px;
         margin: 18px 0;
         border-radius: 8px;
         font-size: 15px;
         line-height: 1.6;
-        color: #1B5E20 !important;
+        color: #E2E8F0 !important;
     }
     .warning-box {
-        background-color: #FFF3E0;
-        border-left: 5px solid #FF9800;
+        background-color: #1E293B;
+        border-left: 5px solid #F59E0B;
         padding: 18px 20px;
         margin: 18px 0;
         border-radius: 8px;
         font-size: 15px;
         line-height: 1.6;
-        color: #E65100 !important;
+        color: #E2E8F0 !important;
     }
     
-    /* Pipeline Steps */
+    /* Pipeline Steps (Dark Mode) */
     .pipeline-step {
-        background-color: white;
-        border: 2px solid #2563EB;
+        background-color: #1E293B;
+        border: 2px solid #3B82F6;
         border-radius: 12px;
         padding: 18px 12px;
         text-align: center;
         font-weight: 600;
-        color: #0A2540 !important;
-        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
-    }
-    
-    /* Sidebar */
-    .sidebar-content {
-        background-color: #F8FAFC;
-        border-right: 1px solid #E2E8F0;
-    }
-    
-    /* Buttons & Inputs */
-    .stButton>button {
-        background-color: #2563EB;
-        color: white !important;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 24px;
-        font-weight: 600;
-        transition: background-color 0.2s;
-    }
-    .stButton>button:hover {
-        background-color: #1D4ED8;
+        color: #FAFAFA !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     
     /* Hide Streamlit branding */
@@ -173,13 +139,13 @@ st.markdown("""
 st.sidebar.title("🧭 Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
+    [" Dashboard", "📂 Dataset", " AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
     label_visibility="collapsed",
     index=0
 )
 
 # ==========================================
-# 4. 🏠 DASHBOARD
+# 4.  DASHBOARD
 # ==========================================
 if page == "🏠 Dashboard":
     st.markdown("### 🎯 Project Overview")
@@ -194,32 +160,14 @@ if page == "🏠 Dashboard":
     c1, c2, c3 = st.columns(3)
     
     with c1:
-        st.markdown("""
-        <div class="stat-card">
-            <h3>Global Cases</h3>
-            <p>2.3B+</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
+        st.markdown('<div class="stat-card"><h3>Global Cases</h3><p>2.3B+</p></div>', unsafe_allow_html=True)
     with c2:
-        st.markdown("""
-        <div class="stat-card">
-            <h3>Malaysia Adults</h3>
-            <p>85.1%</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
+        st.markdown('<div class="stat-card"><h3>Malaysia Adults</h3><p>85.1%</p></div>', unsafe_allow_html=True)
     with c3:
-        st.markdown("""
-        <div class="stat-card">
-            <h3>Malaysia Kids</h3>
-            <p>71.3%</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="stat-card"><h3>Malaysia Kids</h3><p>71.3%</p></div>', unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # Project Objectives
     st.markdown("### ✅ Core Objectives")
     st.markdown("""
     1. **Review** current techniques for identifying dental caries in radiographic images.
@@ -227,11 +175,9 @@ if page == "🏠 Dashboard":
     3. **Evaluate** the system's accuracy and implement **Explainable AI (Grad-CAM)** to build clinical trust.
     """)
 
-    # Interactive Quiz
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### 🧠 Quick Knowledge Check")
     st.markdown("**What percentage of Malaysian adults suffer from dental caries?**")
-    
     options = ["65.2%", "75.8%", "85.1%", "92.3%"]
     answer = st.radio("Select an answer:", options, horizontal=True, label_visibility="collapsed")
     
@@ -244,24 +190,18 @@ if page == "🏠 Dashboard":
 # ==========================================
 # 5. 📂 DATASET
 # ==========================================
-elif page == "📂 Dataset":
-    st.markdown("### 📊 Dataset Overview & Preprocessing")
+elif page == " Dataset":
+    st.markdown("###  Dataset Overview & Preprocessing")
     st.write("Curated dental radiograph dataset with expert annotations, strictly processed for medical AI standards.")
     
     col1, col2, col3, col4 = st.columns(4)
-    with col1: 
-        st.metric(label="📷 Total Images", value="500+", delta="Curated")
-    with col2: 
-        st.metric(label="✅ Healthy", value="350", delta="70%")
-    with col3: 
-        st.metric(label="🦠 Cavity", value="150", delta="30%")
-    with col4: 
-        st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
+    with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
+    with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
+    with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
+    with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    
-    # Class Distribution Visualization
-    st.markdown("### ⚖️ Class Distribution")
+    st.markdown("### ️ Class Distribution")
     st.write("Medical datasets are inherently imbalanced. We applied **Class Weights** during training to prevent bias toward the majority class.")
     
     dist_data = pd.DataFrame({
@@ -272,68 +212,35 @@ elif page == "📂 Dataset":
     col_a, col_b = st.columns(2)
     with col_a:
         fig_pie = px.pie(dist_data, values='Count', names='Class', hole=0.45,
-                         title='Dataset Class Distribution',
-                         color_discrete_sequence=['#059669', '#DC2626'])
+                         color_discrete_sequence=['#10B981', '#EF4444'])
         fig_pie.update_traces(textposition='inside', textinfo='percent+label')
-        fig_pie.update_layout(
-            template='plotly_white', 
-            height=400, 
-            plot_bgcolor='white', 
-            paper_bgcolor='white',
-            font=dict(color='#0A2540', size=12)
-        )
+        fig_pie.update_layout(template='plotly_dark', height=400, 
+                              plot_bgcolor='#0E1117', paper_bgcolor='#0E1117',
+                              font=dict(color='#FAFAFA'))
         st.plotly_chart(fig_pie, use_container_width=True)
         
     with col_b:
         fig_bar = px.bar(dist_data, x='Class', y='Count', color='Class',
-                         color_discrete_map={'No Cavity (Healthy)': '#059669', 'Cavity (Caries)': '#DC2626'},
-                         title='Number of Images per Class',
+                         color_discrete_map={'No Cavity (Healthy)': '#10B981', 'Cavity (Caries)': '#EF4444'},
                          text='Count')
-        fig_bar.update_layout(
-            showlegend=False, 
-            template='plotly_white', 
-            height=400,
-            plot_bgcolor='white', 
-            paper_bgcolor='white',
-            font=dict(color='#0A2540', size=12)
-        )
+        fig_bar.update_layout(showlegend=False, template='plotly_dark', height=400,
+                              plot_bgcolor='#0E1117', paper_bgcolor='#0E1117',
+                              font=dict(color='#FAFAFA'))
         st.plotly_chart(fig_bar, use_container_width=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-
-    # Preprocessing Pipeline
     st.markdown("### 🔬 Preprocessing Pipeline")
     st.write("Raw radiographs undergo strict standardization before model ingestion.")
     
     step1, step2, step3, step4 = st.columns(4)
     with step1:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #1976d2; margin: 0;">1️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600;">Grayscale<br>Conversion</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step">1️⃣<br>Grayscale<br>Conversion</div>', unsafe_allow_html=True)
     with step2:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #1976d2; margin: 0;">2️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600;">CLAHE<br>Enhancement</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step">2️⃣<br>CLAHE<br>Enhancement</div>', unsafe_allow_html=True)
     with step3:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #1976d2; margin: 0;">3️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600;">Resize<br>224×224</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step">3️<br>Resize<br>224×224</div>', unsafe_allow_html=True)
     with step4:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #1976d2; margin: 0;">4️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600;">Normalization<br>[0, 1]</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step">4️⃣<br>Normalization<br>[0, 1]</div>', unsafe_allow_html=True)
 
     with st.expander("ℹ️ Why CLAHE is Critical for Dental X-Rays"):
         st.markdown("""
@@ -345,7 +252,7 @@ elif page == "📂 Dataset":
 # ==========================================
 # 6. 🧠 AI MODELS
 # ==========================================
-elif page == "🧠 AI Models":
+elif page == " AI Models":
     st.markdown("### 🏗️ Architecture & Methodology")
     st.write("Three architectures were rigorously evaluated to determine the optimal clinical deployment model.")
     
@@ -363,7 +270,7 @@ elif page == "🧠 AI Models":
     with col2:
         st.markdown("""
         <div class="warning-box">
-        <strong>⚠️ ResNet50 & MobileNetV2</strong><br>
+        <strong>️ ResNet50 & MobileNetV2</strong><br>
         Transfer learning models struggled. ResNet50 (23M parameters) failed completely 
         due to dataset size mismatch and CLAHE disrupting ImageNet weight distributions. 
         MobileNetV2 showed marginal improvement after fine-tuning but remained outperformed.
@@ -371,7 +278,7 @@ elif page == "🧠 AI Models":
         """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 📋 Model Selection Criteria")
+    st.markdown("###  Model Selection Criteria")
     st.markdown("""
     | Criteria | Baseline CNN | MobileNetV2 | ResNet50 |
     |---|---|---|---|
@@ -413,10 +320,10 @@ elif page == "📈 Results":
         title='Model Performance Across Key Metrics',
         yaxis_title='Score',
         yaxis_tickformat='.0%',
-        template='plotly_white',
-        plot_bgcolor='white',
-        paper_bgcolor='white',
-        font=dict(color='#0A2540', size=12),
+        template='plotly_dark',
+        plot_bgcolor='#0E1117',
+        paper_bgcolor='#0E1117',
+        font=dict(color='#FAFAFA'),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         height=450
     )
@@ -437,10 +344,10 @@ elif page == "📈 Results":
         ))
     fig_radar.update_layout(
         polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
-        template='plotly_white',
-        plot_bgcolor='white',
-        paper_bgcolor='white',
-        font=dict(color='#0A2540', size=12),
+        template='plotly_dark',
+        plot_bgcolor='#0E1117',
+        paper_bgcolor='#0E1117',
+        font=dict(color='#FAFAFA'),
         height=450
     )
     st.plotly_chart(fig_radar, use_container_width=True)
@@ -508,22 +415,17 @@ elif page == "🔬 AI Diagnosis":
 
     with col2:
         if uploaded_file is not None:
-            # Open image with PIL
-            from PIL import Image
             image = Image.open(uploaded_file)
             st.image(image, caption="Uploaded Radiograph", use_column_width=True)
             
-            # Simulate processing time
             with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
             with st.spinner('🧠 Step 2: Running CNN Inference...'):
                 time.sleep(0.4)
-            with st.spinner('🔥 Step 3: Generating Grad-CAM Heatmap...'):
+            with st.spinner(' Step 3: Generating Grad-CAM Heatmap...'):
                 time.sleep(0.4)
                 
                 if TF_AVAILABLE:
-                    # REAL AI PREDICTION (Localhost)
-                    import cv2
                     img_array = np.array(image)
                     if len(img_array.shape) == 3:
                         gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
@@ -566,7 +468,6 @@ elif page == "🔬 AI Diagnosis":
                     else:
                         heatmap_img = image
                 else:
-                    # DEMO MODE (Streamlit Cloud)
                     prediction_prob = np.random.uniform(0.35, 0.85)
                     heatmap_img = image.copy().convert('RGB').resize((224, 224))
                     overlay = Image.new('RGBA', (224, 224), (0, 0, 0, 0))
@@ -577,7 +478,6 @@ elif page == "🔬 AI Diagnosis":
                     overlay = overlay.filter(ImageFilter.GaussianBlur(radius=15))
                     heatmap_img = Image.alpha_composite(heatmap_img.convert('RGBA'), overlay).convert('RGB')
             
-            # Determine result
             OPTIMAL_THRESHOLD = 0.35
             is_cavity = prediction_prob >= OPTIMAL_THRESHOLD
             confidence = prediction_prob if is_cavity else (1 - prediction_prob)
@@ -616,7 +516,7 @@ elif page == "🔬 AI Diagnosis":
         else:
             st.markdown("""
             <div class="info-box">
-                <h4>📖 How to Use This Tool</h4>
+                <h4> How to Use This Tool</h4>
                 <p>1. Upload a digital dental radiograph (JPG/PNG format).</p>
                 <p>2. System applies <strong>CLAHE contrast enhancement</strong> to highlight subtle lesions.</p>
                 <p>3. CNN analyzes image and returns <strong>binary classification</strong> with confidence score.</p>
@@ -682,7 +582,7 @@ elif page == "ℹ️ About":
 # ==========================================
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("""
-<div style='text-align: center; color: #64748B; padding: 20px; border-top: 1px solid #E2E8F0; margin-top: 40px; font-size: 14px;'>
+<div style='text-align: center; color: #64748B; padding: 20px; border-top: 1px solid #334155; margin-top: 40px; font-size: 14px;'>
     <p>🦷 Automated Detection of Dental Caries from Dental X-ray Images | FYP2 2024</p>
     <p>Developed by Barry Ng Kee Hong (0135374) | University of Wollongong Malaysia</p>
 </div>
