@@ -14,7 +14,7 @@ import random
 # ==========================================
 st.set_page_config(
     page_title="AI Dental Caries Detection System", 
-    page_icon="🦷", 
+    page_icon="", 
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -139,7 +139,7 @@ st.markdown("""
 st.sidebar.title("🧭 Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    [" Dashboard", "📂 Dataset", " AI Models", "📈 Results", " AI Diagnosis", "ℹ️ About"],
+    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
     label_visibility="collapsed",
     index=0
 )
@@ -205,20 +205,20 @@ if page == "🏠 Dashboard":
             st.error("❌ Incorrect. The correct answer is 85.1% - highlighting the critical need for automated detection!")
 
 # ==========================================
-#  DATASET
+# 📂 DATASET
 # ==========================================
-elif page == "📂 Dataset":
-    st.markdown("### 📊 Dataset Overview & Preprocessing")
+elif page == " Dataset":
+    st.markdown("###  Dataset Overview & Preprocessing")
     st.write("Curated dental radiograph dataset with expert annotations, strictly processed for medical AI standards.")
     
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
+    with col1: st.metric(label=" Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
-    with col4: st.metric(label=" Resolution", value="224x224", delta="Pixels")
+    with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ⚖️ Class Distribution")
+    st.markdown("### ️ Class Distribution")
     st.write("Medical datasets are inherently imbalanced. We applied **Class Weights** during training to prevent bias toward the majority class.")
     
     dist_data = pd.DataFrame({
@@ -250,9 +250,7 @@ elif page == "📂 Dataset":
     st.markdown("### 🔬 Preprocessing Pipeline")
     st.write("Raw radiographs undergo strict standardization before model ingestion.")
     
-    # CHANGED: Added spacer columns (space1, space2, space3) to create gaps between the boxes
-    step1, space1, step2, space2, step3, space3, step4 = st.columns([4, 1, 4, 1, 4, 1, 4])
-    
+    step1, step2, step3, step4 = st.columns(4)
     with step1:
         st.markdown("""
         <div class="pipeline-step">
@@ -270,7 +268,7 @@ elif page == "📂 Dataset":
     with step3:
         st.markdown("""
         <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">3️⃣</h3>
+            <h3 style="color: #FFFFFF; margin: 0;">3️</h3>
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Resize<br>224×224</p>
         </div>
         """, unsafe_allow_html=True)
@@ -330,7 +328,7 @@ elif page == "🧠 AI Models":
     """)
 
 # ==========================================
-#  RESULTS
+# 📈 RESULTS
 # ==========================================
 elif page == "📈 Results":
     st.markdown("### 📊 Performance Evaluation & Threshold Optimization")
@@ -370,7 +368,7 @@ elif page == "📈 Results":
     st.plotly_chart(fig_metrics, use_container_width=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ️ Radar Analysis")
+    st.markdown("### 🕸️ Radar Analysis")
     st.write("Holistic view of model strengths across all evaluation dimensions.")
     
     fig_radar = go.Figure()
@@ -449,11 +447,11 @@ elif page == "🔬 AI Diagnosis":
             st.image(image, caption="Uploaded Radiograph", use_column_width=True)
             
             # Simulate processing time
-            with st.spinner(' Step 1: Applying CLAHE Enhancement...'):
+            with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
             with st.spinner('🧠 Step 2: Running CNN Inference...'):
                 time.sleep(0.4)
-            with st.spinner('🔥 Step 3: Generating Grad-CAM Heatmap...'):
+            with st.spinner(' Step 3: Generating Grad-CAM Heatmap...'):
                 time.sleep(0.4)
                 
                 if TF_AVAILABLE:
@@ -560,7 +558,7 @@ elif page == "🔬 AI Diagnosis":
             </div>
             """, unsafe_allow_html=True)
             
-            st.info("👆 Upload a radiograph to begin analysis.")
+            st.info(" Upload a radiograph to begin analysis.")
 
 # ==========================================
 # ℹ️ ABOUT
@@ -572,24 +570,20 @@ elif page == "ℹ️ About":
     with col1:
         st.markdown("#### 👨‍💻 Developer")
         st.markdown("""
-        <div style='line-height: 2.2;'>
-        <b>Name:</b> Barry Ng Kee Hong<br>
-        <b>Student ID:</b> 0135374<br>
-        <b>Programme:</b> Bachelor of Computer Science (Hons)<br>
-        <b>Institution:</b> University of Wollongong Malaysia
-        </div>
-        """, unsafe_allow_html=True)
+        **Barry Ng Kee Hong**<br>
+        Student ID: 0135374<br>
+        Bachelor of Computer Science (Hons)<br>
+        University of Wollongong Malaysia
+        """)
         
-        # Added a single <br> for a little spacing
+        # Added a little space here
         st.markdown("<br>", unsafe_allow_html=True)
         
-        st.markdown("#### 👨‍🏫 Supervision")
+        st.markdown("#### 👨‍ Supervision")
         st.markdown("""
-        <div style='line-height: 2.2;'>
-        <b>Main Supervisor:</b> Mr Chua Hiang Kiat<br>
-        <b>Co-Supervisor:</b> Ms. Norsyela binti Muhammad Noor Mathivanan
-        </div>
-        """, unsafe_allow_html=True)
+        **Main Supervisor:** Mr Chua Hiang Kiat<br>
+        **Co-Supervisor:** Ms. Norsyela binti Muhammad Noor Mathivanan
+        """)
         
     with col2:
         st.markdown("#### 🛠️ Technology Stack")
@@ -614,7 +608,7 @@ elif page == "ℹ️ About":
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("""
     <div class="info-box">
-    <strong>⚠️ Clinical Disclaimer:</strong> This system is designed as an <strong>educational and assistive prototype</strong> 
+    <strong>️ Clinical Disclaimer:</strong> This system is designed as an <strong>educational and assistive prototype</strong> 
     for Final Year Project demonstration purposes. It does <strong>not</strong> replace professional clinical judgment, 
     radiographic interpretation, or established diagnostic protocols. Always verify AI findings with qualified dental practitioners.
     </div>
