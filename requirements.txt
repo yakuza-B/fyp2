@@ -1,9 +1,9 @@
-   tensorflow-cpu
-   opencv-python-headless
-   numpy
-   pandas
-   matplotlib
-   scikit-learn
-   streamlit
-   Pillow
-   plotly
+tensorflow-cpu
+opencv-python-headless
+numpy
+pandas
+matplotlib
+scikit-learn
+streamlit
+Pillow
+plotly
