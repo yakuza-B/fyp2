@@ -426,7 +426,6 @@ elif page == "🔬 AI Diagnosis":
         )
         
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("### ⚙️ System Status")
         
         if TF_AVAILABLE:
             @st.cache_resource
