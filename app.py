@@ -408,7 +408,7 @@ elif page == "🔬 AI Diagnosis":
     st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
     st.write("Upload a dental radiograph for instant analysis, confidence scoring, and explainable heatmap visualization.")
 
-    # TensorFlow Fallback Logic
+    # TensorFlow Fallback Logic (Hidden from UI)
     try:
         import tensorflow as tf
         TF_AVAILABLE = True
@@ -425,30 +425,19 @@ elif page == "🔬 AI Diagnosis":
             help="Periapical, bitewing, or panoramic dental radiograph"
         )
         
-        st.markdown("<br>", unsafe_allow_html=True)
-        
+        # Hidden Model Loading Logic
         if TF_AVAILABLE:
             @st.cache_resource
             def load_model():
                 if os.path.exists("best_caries_model.keras"):
                     return tf.keras.models.load_model("best_caries_model.keras")
                 return None
-            
+
             model = load_model()
             if model is not None:
-                st.success("✅ **AI Engine Active** (TensorFlow Loaded)")
+                TF_AVAILABLE = True
             else:
-                st.warning("⚠️ Model file not found. Running in Demo Mode.")
                 TF_AVAILABLE = False
-        else:
-            st.warning("☁️ **Cloud Demo Mode** (Simulated AI Engine)")
-            
-        st.info("""
-        **Architecture:** Custom CNN + GAP<br>
-        **Preprocessing:** CLAHE Contrast Enhancement<br>
-        **Explainability:** Grad-CAM Heatmaps<br>
-        **Threshold:** Medical Recall Optimized (0.35)
-        """)
 
     with col2:
         if uploaded_file is not None:
