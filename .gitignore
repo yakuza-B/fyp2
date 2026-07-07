@@ -1,0 +1,32 @@
+# Dataset and Processed Data
+xray image/
+processed_data/
+*.npy
+
+# Trained Models
+*.keras
+*.h5
+*.pb
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/secrets.toml
