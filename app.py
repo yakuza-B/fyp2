@@ -10,7 +10,7 @@ import time
 import random
 
 # ==========================================
-# 1. PAGE CONFIG & DARK THEME CSS
+# PAGE CONFIG & CUSTOM CSS
 # ==========================================
 st.set_page_config(
     page_title="AI Dental Caries Detection System", 
@@ -21,9 +21,9 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* Force Dark Text on Dark Background */
-    h1, h2, h3, h4, p, div, span, label {
-        color: #FAFAFA !important;
+    /* Force LIGHT text on dark background */
+    h1, h2, h3, h4, h5, h6, p, div, span, label, strong, b {
+        color: #FFFFFF !important;
     }
     
     /* App Header */
@@ -68,7 +68,7 @@ st.markdown("""
     .stat-card p {
         font-size: 28px;
         font-weight: 700;
-        color: #FAFAFA !important;
+        color: #FFFFFF !important;
         margin: 0 !important;
     }
     
@@ -112,7 +112,7 @@ st.markdown("""
         padding: 18px 12px;
         text-align: center;
         font-weight: 600;
-        color: #FAFAFA !important;
+        color: #FFFFFF !important;
         box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     
@@ -124,7 +124,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# 2. HEADER
+# HEADER
 # ==========================================
 st.markdown("""
 <div class="app-header">
@@ -134,18 +134,18 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# 3. SIDEBAR NAVIGATION
+# SIDEBAR NAVIGATION
 # ==========================================
 st.sidebar.title("🧭 Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    [" Dashboard", "📂 Dataset", " AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
+    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
     label_visibility="collapsed",
     index=0
 )
 
 # ==========================================
-# 4.  DASHBOARD
+# 🏠 DASHBOARD
 # ==========================================
 if page == "🏠 Dashboard":
     st.markdown("### 🎯 Project Overview")
@@ -160,11 +160,28 @@ if page == "🏠 Dashboard":
     c1, c2, c3 = st.columns(3)
     
     with c1:
-        st.markdown('<div class="stat-card"><h3>Global Cases</h3><p>2.3B+</p></div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="stat-card">
+            <h3>Global Cases</h3>
+            <p>2.3B+</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
     with c2:
-        st.markdown('<div class="stat-card"><h3>Malaysia Adults</h3><p>85.1%</p></div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="stat-card">
+            <h3>Malaysia Adults</h3>
+            <p>85.1%</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
     with c3:
-        st.markdown('<div class="stat-card"><h3>Malaysia Kids</h3><p>71.3%</p></div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="stat-card">
+            <h3>Malaysia Kids</h3>
+            <p>71.3%</p>
+        </div>
+        """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -188,10 +205,10 @@ if page == "🏠 Dashboard":
             st.error("❌ Incorrect. The correct answer is 85.1% - highlighting the critical need for automated detection!")
 
 # ==========================================
-# 5. 📂 DATASET
+# 📂 DATASET
 # ==========================================
-elif page == " Dataset":
-    st.markdown("###  Dataset Overview & Preprocessing")
+elif page == "📂 Dataset":
+    st.markdown("### 📊 Dataset Overview & Preprocessing")
     st.write("Curated dental radiograph dataset with expert annotations, strictly processed for medical AI standards.")
     
     col1, col2, col3, col4 = st.columns(4)
@@ -201,7 +218,7 @@ elif page == " Dataset":
     with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ️ Class Distribution")
+    st.markdown("### ⚖️ Class Distribution")
     st.write("Medical datasets are inherently imbalanced. We applied **Class Weights** during training to prevent bias toward the majority class.")
     
     dist_data = pd.DataFrame({
@@ -212,11 +229,12 @@ elif page == " Dataset":
     col_a, col_b = st.columns(2)
     with col_a:
         fig_pie = px.pie(dist_data, values='Count', names='Class', hole=0.45,
+                         title='Dataset Class Distribution',
                          color_discrete_sequence=['#10B981', '#EF4444'])
         fig_pie.update_traces(textposition='inside', textinfo='percent+label')
         fig_pie.update_layout(template='plotly_dark', height=400, 
                               plot_bgcolor='#0E1117', paper_bgcolor='#0E1117',
-                              font=dict(color='#FAFAFA'))
+                              font=dict(color='#FFFFFF'))
         st.plotly_chart(fig_pie, use_container_width=True)
         
     with col_b:
@@ -225,7 +243,7 @@ elif page == " Dataset":
                          text='Count')
         fig_bar.update_layout(showlegend=False, template='plotly_dark', height=400,
                               plot_bgcolor='#0E1117', paper_bgcolor='#0E1117',
-                              font=dict(color='#FAFAFA'))
+                              font=dict(color='#FFFFFF'))
         st.plotly_chart(fig_bar, use_container_width=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -234,13 +252,33 @@ elif page == " Dataset":
     
     step1, step2, step3, step4 = st.columns(4)
     with step1:
-        st.markdown('<div class="pipeline-step">1️⃣<br>Grayscale<br>Conversion</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="pipeline-step">
+            <h3 style="color: #FFFFFF; margin: 0;">1️⃣</h3>
+            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Grayscale<br>Conversion</p>
+        </div>
+        """, unsafe_allow_html=True)
     with step2:
-        st.markdown('<div class="pipeline-step">2️⃣<br>CLAHE<br>Enhancement</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="pipeline-step">
+            <h3 style="color: #FFFFFF; margin: 0;">2️⃣</h3>
+            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">CLAHE<br>Enhancement</p>
+        </div>
+        """, unsafe_allow_html=True)
     with step3:
-        st.markdown('<div class="pipeline-step">3️<br>Resize<br>224×224</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="pipeline-step">
+            <h3 style="color: #FFFFFF; margin: 0;">3️⃣</h3>
+            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Resize<br>224×224</p>
+        </div>
+        """, unsafe_allow_html=True)
     with step4:
-        st.markdown('<div class="pipeline-step">4️⃣<br>Normalization<br>[0, 1]</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="pipeline-step">
+            <h3 style="color: #FFFFFF; margin: 0;">4️⃣</h3>
+            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Normalization<br>[0, 1]</p>
+        </div>
+        """, unsafe_allow_html=True)
 
     with st.expander("ℹ️ Why CLAHE is Critical for Dental X-Rays"):
         st.markdown("""
@@ -250,9 +288,9 @@ elif page == " Dataset":
         """)
 
 # ==========================================
-# 6. 🧠 AI MODELS
+# 🧠 AI MODELS
 # ==========================================
-elif page == " AI Models":
+elif page == "🧠 AI Models":
     st.markdown("### 🏗️ Architecture & Methodology")
     st.write("Three architectures were rigorously evaluated to determine the optimal clinical deployment model.")
     
@@ -270,7 +308,7 @@ elif page == " AI Models":
     with col2:
         st.markdown("""
         <div class="warning-box">
-        <strong>️ ResNet50 & MobileNetV2</strong><br>
+        <strong>⚠️ ResNet50 & MobileNetV2</strong><br>
         Transfer learning models struggled. ResNet50 (23M parameters) failed completely 
         due to dataset size mismatch and CLAHE disrupting ImageNet weight distributions. 
         MobileNetV2 showed marginal improvement after fine-tuning but remained outperformed.
@@ -278,7 +316,7 @@ elif page == " AI Models":
         """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("###  Model Selection Criteria")
+    st.markdown("### 📋 Model Selection Criteria")
     st.markdown("""
     | Criteria | Baseline CNN | MobileNetV2 | ResNet50 |
     |---|---|---|---|
@@ -290,7 +328,7 @@ elif page == " AI Models":
     """)
 
 # ==========================================
-# 7. 📈 RESULTS
+# 📈 RESULTS
 # ==========================================
 elif page == "📈 Results":
     st.markdown("### 📊 Performance Evaluation & Threshold Optimization")
@@ -323,7 +361,7 @@ elif page == "📈 Results":
         template='plotly_dark',
         plot_bgcolor='#0E1117',
         paper_bgcolor='#0E1117',
-        font=dict(color='#FAFAFA'),
+        font=dict(color='#FFFFFF'),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         height=450
     )
@@ -347,7 +385,7 @@ elif page == "📈 Results":
         template='plotly_dark',
         plot_bgcolor='#0E1117',
         paper_bgcolor='#0E1117',
-        font=dict(color='#FAFAFA'),
+        font=dict(color='#FFFFFF'),
         height=450
     )
     st.plotly_chart(fig_radar, use_container_width=True)
@@ -364,7 +402,7 @@ elif page == "📈 Results":
     """, unsafe_allow_html=True)
 
 # ==========================================
-# 8. 🔬 AI DIAGNOSIS (PREDICTION TOOL)
+# 🔬 AI DIAGNOSIS (PREDICTION TOOL)
 # ==========================================
 elif page == "🔬 AI Diagnosis":
     st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
@@ -415,17 +453,22 @@ elif page == "🔬 AI Diagnosis":
 
     with col2:
         if uploaded_file is not None:
+            # Open image with PIL
+            from PIL import Image
             image = Image.open(uploaded_file)
             st.image(image, caption="Uploaded Radiograph", use_column_width=True)
             
+            # Simulate processing time
             with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
             with st.spinner('🧠 Step 2: Running CNN Inference...'):
                 time.sleep(0.4)
-            with st.spinner(' Step 3: Generating Grad-CAM Heatmap...'):
+            with st.spinner('🔥 Step 3: Generating Grad-CAM Heatmap...'):
                 time.sleep(0.4)
                 
                 if TF_AVAILABLE:
+                    # REAL AI PREDICTION (Localhost)
+                    import cv2
                     img_array = np.array(image)
                     if len(img_array.shape) == 3:
                         gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
@@ -468,6 +511,7 @@ elif page == "🔬 AI Diagnosis":
                     else:
                         heatmap_img = image
                 else:
+                    # DEMO MODE (Streamlit Cloud)
                     prediction_prob = np.random.uniform(0.35, 0.85)
                     heatmap_img = image.copy().convert('RGB').resize((224, 224))
                     overlay = Image.new('RGBA', (224, 224), (0, 0, 0, 0))
@@ -478,6 +522,7 @@ elif page == "🔬 AI Diagnosis":
                     overlay = overlay.filter(ImageFilter.GaussianBlur(radius=15))
                     heatmap_img = Image.alpha_composite(heatmap_img.convert('RGBA'), overlay).convert('RGB')
             
+            # Determine result
             OPTIMAL_THRESHOLD = 0.35
             is_cavity = prediction_prob >= OPTIMAL_THRESHOLD
             confidence = prediction_prob if is_cavity else (1 - prediction_prob)
@@ -516,7 +561,7 @@ elif page == "🔬 AI Diagnosis":
         else:
             st.markdown("""
             <div class="info-box">
-                <h4> How to Use This Tool</h4>
+                <h4>📖 How to Use This Tool</h4>
                 <p>1. Upload a digital dental radiograph (JPG/PNG format).</p>
                 <p>2. System applies <strong>CLAHE contrast enhancement</strong> to highlight subtle lesions.</p>
                 <p>3. CNN analyzes image and returns <strong>binary classification</strong> with confidence score.</p>
@@ -528,7 +573,7 @@ elif page == "🔬 AI Diagnosis":
             st.info("👆 Upload a radiograph to begin analysis.")
 
 # ==========================================
-# 9. ℹ️ ABOUT
+# ℹ️ ABOUT
 # ==========================================
 elif page == "ℹ️ About":
     st.markdown("### ℹ️ Project Information & References")
