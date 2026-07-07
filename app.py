@@ -571,14 +571,14 @@ elif page == "ℹ️ About":
         st.markdown("#### 👨‍💻 Developer")
         st.markdown("""
         <div style='line-height: 2.2;'>
-        <b>Barry Ng Kee Hong</b><br>
-        Student ID: 0135374<br>
-        Bachelor of Computer Science (Hons)<br>
-        University of Wollongong Malaysia
+        <b>Name:</b> Barry Ng Kee Hong<br>
+        <b>Student ID:</b> 0135374<br>
+        <b>Programme:</b> Bachelor of Computer Science (Hons)<br>
+        <b>Institution:</b> University of Wollongong Malaysia
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("<br><br>", unsafe_allow_html=True)
+        # Removed the extra <br><br> here so it sits closer to Supervision
         
         st.markdown("#### 👨‍🏫 Supervision")
         st.markdown("""
@@ -589,7 +589,7 @@ elif page == "ℹ️ About":
         """, unsafe_allow_html=True)
         
     with col2:
-        st.markdown("#### 🛠️ Technology ")
+        st.markdown("#### 🛠️ Technology Stack")
         st.markdown("""
         - **Language:** Python 3.11
         - **Deep Learning:** TensorFlow 2.15, Keras
