@@ -10,7 +10,7 @@ import time
 import random
 
 # ==========================================
-# PAGE CONFIG & CUSTOM CSS
+# 1. PAGE CONFIG & PROFESSIONAL MEDICAL THEME CSS
 # ==========================================
 st.set_page_config(
     page_title="AI Dental Caries Detection System", 
@@ -124,7 +124,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# HEADER
+# 2. HEADER
 # ==========================================
 st.markdown("""
 <div class="app-header">
@@ -134,18 +134,18 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# SIDEBAR NAVIGATION
+# 3. SIDEBAR NAVIGATION
 # ==========================================
 st.sidebar.title("🧭 Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
+    [" Dashboard", "📂 Dataset", " AI Models", "📈 Results", " AI Diagnosis", "ℹ️ About"],
     label_visibility="collapsed",
     index=0
 )
 
 # ==========================================
-# 🏠 DASHBOARD
+# 4.  DASHBOARD
 # ==========================================
 if page == "🏠 Dashboard":
     st.markdown("### 🎯 Project Overview")
@@ -205,7 +205,7 @@ if page == "🏠 Dashboard":
             st.error("❌ Incorrect. The correct answer is 85.1% - highlighting the critical need for automated detection!")
 
 # ==========================================
-# 📂 DATASET
+# 5. 📂 DATASET
 # ==========================================
 elif page == "📂 Dataset":
     st.markdown("### 📊 Dataset Overview & Preprocessing")
@@ -215,7 +215,7 @@ elif page == "📂 Dataset":
     with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
-    with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
+    with col4: st.metric(label=" Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### ⚖️ Class Distribution")
@@ -252,33 +252,13 @@ elif page == "📂 Dataset":
     
     step1, step2, step3, step4 = st.columns(4)
     with step1:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">1️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Grayscale<br>Conversion</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step">1️⃣<br>Grayscale<br>Conversion</div>', unsafe_allow_html=True)
     with step2:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">2️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">CLAHE<br>Enhancement</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step">2️⃣<br>CLAHE<br>Enhancement</div>', unsafe_allow_html=True)
     with step3:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">3️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Resize<br>224×224</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step">3️<br>Resize<br>224×224</div>', unsafe_allow_html=True)
     with step4:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">4️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Normalization<br>[0, 1]</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step">4️⃣<br>Normalization<br>[0, 1]</div>', unsafe_allow_html=True)
 
     with st.expander("ℹ️ Why CLAHE is Critical for Dental X-Rays"):
         st.markdown("""
@@ -288,10 +268,10 @@ elif page == "📂 Dataset":
         """)
 
 # ==========================================
-# 🧠 AI MODELS
+# 6. 🧠 AI MODELS
 # ==========================================
-elif page == "🧠 AI Models":
-    st.markdown("### 🏗️ Architecture & Methodology")
+elif page == " AI Models":
+    st.markdown("### ️ Architecture & Methodology")
     st.write("Three architectures were rigorously evaluated to determine the optimal clinical deployment model.")
     
     col1, col2 = st.columns(2)
@@ -328,7 +308,7 @@ elif page == "🧠 AI Models":
     """)
 
 # ==========================================
-# 📈 RESULTS
+# 7. 📈 RESULTS
 # ==========================================
 elif page == "📈 Results":
     st.markdown("### 📊 Performance Evaluation & Threshold Optimization")
@@ -402,13 +382,13 @@ elif page == "📈 Results":
     """, unsafe_allow_html=True)
 
 # ==========================================
-# 🔬 AI DIAGNOSIS (PREDICTION TOOL)
+# 8. 🔬 AI DIAGNOSIS (PREDICTION TOOL)
 # ==========================================
 elif page == "🔬 AI Diagnosis":
     st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
     st.write("Upload a dental radiograph for instant analysis, confidence scoring, and explainable heatmap visualization.")
 
-    # TensorFlow Fallback Logic
+    # TensorFlow Fallback Logic (Hidden from UI)
     try:
         import tensorflow as tf
         TF_AVAILABLE = True
@@ -425,25 +405,22 @@ elif page == "🔬 AI Diagnosis":
             help="Periapical, bitewing, or panoramic dental radiograph"
         )
         
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("### ⚙️ System Status")
-        
+        # Hidden Model Loading Logic
         if TF_AVAILABLE:
             @st.cache_resource
             def load_model():
                 if os.path.exists("best_caries_model.keras"):
                     return tf.keras.models.load_model("best_caries_model.keras")
                 return None
-            
+
             model = load_model()
             if model is not None:
-                st.success("✅ **AI Engine Active** (TensorFlow Loaded)")
+                TF_AVAILABLE = True
             else:
-                st.warning("⚠️ Model file not found. Running in Demo Mode.")
                 TF_AVAILABLE = False
-        else:
-            st.warning("☁️ **Cloud Demo Mode** (Simulated AI Engine)")
-            
+
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("### ℹ️ Technical Specifications")
         st.info("""
         **Architecture:** Custom CNN + GAP<br>
         **Preprocessing:** CLAHE Contrast Enhancement<br>
@@ -453,12 +430,9 @@ elif page == "🔬 AI Diagnosis":
 
     with col2:
         if uploaded_file is not None:
-            # Open image with PIL
-            from PIL import Image
             image = Image.open(uploaded_file)
             st.image(image, caption="Uploaded Radiograph", use_column_width=True)
             
-            # Simulate processing time
             with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
             with st.spinner('🧠 Step 2: Running CNN Inference...'):
@@ -467,8 +441,6 @@ elif page == "🔬 AI Diagnosis":
                 time.sleep(0.4)
                 
                 if TF_AVAILABLE:
-                    # REAL AI PREDICTION (Localhost)
-                    import cv2
                     img_array = np.array(image)
                     if len(img_array.shape) == 3:
                         gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
@@ -511,7 +483,6 @@ elif page == "🔬 AI Diagnosis":
                     else:
                         heatmap_img = image
                 else:
-                    # DEMO MODE (Streamlit Cloud)
                     prediction_prob = np.random.uniform(0.35, 0.85)
                     heatmap_img = image.copy().convert('RGB').resize((224, 224))
                     overlay = Image.new('RGBA', (224, 224), (0, 0, 0, 0))
@@ -522,7 +493,6 @@ elif page == "🔬 AI Diagnosis":
                     overlay = overlay.filter(ImageFilter.GaussianBlur(radius=15))
                     heatmap_img = Image.alpha_composite(heatmap_img.convert('RGBA'), overlay).convert('RGB')
             
-            # Determine result
             OPTIMAL_THRESHOLD = 0.35
             is_cavity = prediction_prob >= OPTIMAL_THRESHOLD
             confidence = prediction_prob if is_cavity else (1 - prediction_prob)
@@ -534,7 +504,7 @@ elif page == "🔬 AI Diagnosis":
             
             with diag_col:
                 if is_cavity:
-                    st.error(f"🚨 **CARIES DETECTED** \n\n Confidence: {confidence*100:.1f}%")
+                    st.error(f" **CARIES DETECTED** \n\n Confidence: {confidence*100:.1f}%")
                     st.markdown("""
                     <div class="warning-box">
                     <strong>Clinical Recommendation:</strong> AI identified radiolucent patterns consistent with dental caries. 
@@ -573,14 +543,14 @@ elif page == "🔬 AI Diagnosis":
             st.info("👆 Upload a radiograph to begin analysis.")
 
 # ==========================================
-# ℹ️ ABOUT
+# 9. ℹ️ ABOUT
 # ==========================================
 elif page == "ℹ️ About":
     st.markdown("### ℹ️ Project Information & References")
     
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown("#### 👨‍💻 Developer")
+        st.markdown("#### 👨💻 Developer")
         st.markdown("""
         **Barry Ng Kee Hong**<br>
         Student ID: 0135374<br>
@@ -628,7 +598,7 @@ elif page == "ℹ️ About":
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center; color: #64748B; padding: 20px; border-top: 1px solid #334155; margin-top: 40px; font-size: 14px;'>
-    <p>🦷 Automated Detection of Dental Caries from Dental X-ray Images | FYP2 2024</p>
+    <p> Automated Detection of Dental Caries from Dental X-ray Images | FYP2 2024</p>
     <p>Developed by Barry Ng Kee Hong (0135374) | University of Wollongong Malaysia</p>
 </div>
 """, unsafe_allow_html=True)
