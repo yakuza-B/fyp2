@@ -145,7 +145,7 @@ page = st.sidebar.radio(
 )
 
 # ==========================================
-# 🏠 DASHBOARD (THE MISSING 'IF' STATEMENT)
+# 🏠 DASHBOARD
 # ==========================================
 if page == "🏠 Dashboard":
     st.markdown("### 🎯 Project Overview")
@@ -290,7 +290,7 @@ elif page == "📂 Dataset":
 # ==========================================
 # 🧠 AI MODELS
 # ==========================================
-elif page == " AI Models":
+elif page == "🧠 AI Models":
     st.markdown("### 🏗️ Architecture & Methodology")
     st.write("Three architectures were rigorously evaluated to determine the optimal clinical deployment model.")
     
@@ -418,7 +418,7 @@ elif page == "🔬 AI Diagnosis":
     col1, col2 = st.columns([1, 2])
 
     with col1:
-        st.markdown("###  Upload Radiograph")
+        st.markdown("### 📤 Upload Radiograph")
         uploaded_file = st.file_uploader(
             "Drag & drop or click to upload", 
             type=["jpg", "jpeg", "png"],
@@ -441,9 +441,12 @@ elif page == "🔬 AI Diagnosis":
 
     with col2:
         if uploaded_file is not None:
+            # Open image with PIL
+            from PIL import Image
             image = Image.open(uploaded_file)
             st.image(image, caption="Uploaded Radiograph", use_column_width=True)
             
+            # Simulate processing time
             with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
             with st.spinner('🧠 Step 2: Running CNN Inference...'):
@@ -452,6 +455,8 @@ elif page == "🔬 AI Diagnosis":
                 time.sleep(0.4)
                 
                 if TF_AVAILABLE:
+                    # REAL AI PREDICTION (Localhost)
+                    import cv2
                     img_array = np.array(image)
                     if len(img_array.shape) == 3:
                         gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
@@ -494,6 +499,7 @@ elif page == "🔬 AI Diagnosis":
                     else:
                         heatmap_img = image
                 else:
+                    # DEMO MODE (Streamlit Cloud)
                     prediction_prob = np.random.uniform(0.35, 0.85)
                     heatmap_img = image.copy().convert('RGB').resize((224, 224))
                     overlay = Image.new('RGBA', (224, 224), (0, 0, 0, 0))
@@ -504,6 +510,7 @@ elif page == "🔬 AI Diagnosis":
                     overlay = overlay.filter(ImageFilter.GaussianBlur(radius=15))
                     heatmap_img = Image.alpha_composite(heatmap_img.convert('RGBA'), overlay).convert('RGB')
             
+            # Determine result
             OPTIMAL_THRESHOLD = 0.35
             is_cavity = prediction_prob >= OPTIMAL_THRESHOLD
             confidence = prediction_prob if is_cavity else (1 - prediction_prob)
@@ -554,27 +561,26 @@ elif page == "🔬 AI Diagnosis":
             st.info("👆 Upload a radiograph to begin analysis.")
 
 # ==========================================
-# ️ ABOUT
+# ℹ️ ABOUT
 # ==========================================
 elif page == "ℹ️ About":
     st.markdown("### ℹ️ Project Information & References")
     
     col1, col2 = st.columns(2)
-    
     with col1:
         st.markdown("#### 👨‍💻 Developer")
         st.markdown("""
         <div style='line-height: 2.2;'>
-        <b>Name:</b> Barry Ng Kee Hong<br>
-        <b>Student ID:</b> 0135374<br>
-        <b>Programme:</b> Bachelor of Computer Science (Hons)<br>
-        <b>Institution:</b> University of Wollongong Malaysia
+        <b>Barry Ng Kee Hong</b><br>
+        Student ID: 0135374<br>
+        Bachelor of Computer Science (Hons)<br>
+        University of Wollongong Malaysia
         </div>
         """, unsafe_allow_html=True)
         
         st.markdown("<br><br>", unsafe_allow_html=True)
         
-        st.markdown("#### 👨‍ Supervision")
+        st.markdown("#### 👨‍🏫 Supervision")
         st.markdown("""
         <div style='line-height: 2.2;'>
         <b>Main Supervisor:</b> Mr Chua Hiang Kiat<br>
@@ -583,7 +589,7 @@ elif page == "ℹ️ About":
         """, unsafe_allow_html=True)
         
     with col2:
-        st.markdown("#### ️ Technology Stack")
+        st.markdown("#### 🛠️ Technology Stack")
         st.markdown("""
         - **Language:** Python 3.11
         - **Deep Learning:** TensorFlow 2.15, Keras
@@ -593,15 +599,23 @@ elif page == "ℹ️ About":
         - **Methodology:** Design Science Research (DSRM)
         """)
         
-        st.markdown("<br><br>", unsafe_allow_html=True)
-        
-        st.markdown("#### 📚 Key References")
-        st.markdown("""
-        1. World Health Organization. (2022). *Global Oral Health Status Report*.
-        2. National Oral Health Survey of Adults (NOHSA). (2020). *Malaysia Ministry of Health*.
-        3. Selvaraju et al. (2017). *Grad-CAM: Visual Explanations from Deep Networks*.
-        4. Peck et al. (2021). *Deep Learning for Dental Caries Detection: A Systematic Review*.
-        """)
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("#### 📚 Key References")
+    st.markdown("""
+    1. World Health Organization. (2022). *Global Oral Health Status Report*.
+    2. National Oral Health Survey of Adults (NOHSA). (2020). *Malaysia Ministry of Health*.
+    3. Selvaraju et al. (2017). *Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization*.
+    4. Peck et al. (2021). *Deep Learning for Dental Caries Detection: A Systematic Review*.
+    """)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="info-box">
+    <strong>⚠️ Clinical Disclaimer:</strong> This system is designed as an <strong>educational and assistive prototype</strong> 
+    for Final Year Project demonstration purposes. It does <strong>not</strong> replace professional clinical judgment, 
+    radiographic interpretation, or established diagnostic protocols. Always verify AI findings with qualified dental practitioners.
+    </div>
+    """, unsafe_allow_html=True)
 
 # ==========================================
 # FOOTER
