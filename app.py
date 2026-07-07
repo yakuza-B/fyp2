@@ -578,7 +578,8 @@ elif page == "ℹ️ About":
         </div>
         """, unsafe_allow_html=True)
         
-        # Removed the extra <br><br> here so it sits closer to Supervision
+        # Added a single <br> for a little spacing
+        st.markdown("<br>", unsafe_allow_html=True)
         
         st.markdown("#### 👨‍🏫 Supervision")
         st.markdown("""
