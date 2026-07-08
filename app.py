@@ -14,7 +14,7 @@ import random
 # ==========================================
 st.set_page_config(
     page_title="AI Dental Caries Detection System", 
-    page_icon="", 
+    page_icon="🦷", 
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -134,12 +134,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# SIDEBAR NAVIGATION
+# SIDEBAR NAVIGATION (FIXED ROUTING)
 # ==========================================
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    ["🏠 Dashboard", " Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
+    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", " Results", "🔬 AI Diagnosis", "️ About"],
     label_visibility="collapsed",
     index=0
 )
@@ -156,7 +156,7 @@ if page == "🏠 Dashboard":
     """)
     
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("###  Burden of Disease")
+    st.markdown("### 🌍 Burden of Disease")
     c1, c2, c3 = st.columns(3)
     
     with c1:
@@ -205,7 +205,7 @@ if page == "🏠 Dashboard":
     """, unsafe_allow_html=True)
 
 # ==========================================
-#  DATASET
+# 📂 DATASET
 # ==========================================
 elif page == "📂 Dataset":
     st.markdown("### 📊 Dataset Overview & Preprocessing")
@@ -215,7 +215,7 @@ elif page == "📂 Dataset":
     with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
-    with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
+    with col4: st.metric(label=" Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### ⚖️ Class Distribution")
@@ -254,7 +254,7 @@ elif page == "📂 Dataset":
     with step1:
         st.markdown("""
         <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">1️</h3>
+            <h3 style="color: #FFFFFF; margin: 0;">1️⃣</h3>
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Grayscale<br>Conversion</p>
         </div>
         """, unsafe_allow_html=True)
@@ -275,7 +275,7 @@ elif page == "📂 Dataset":
     with step4:
         st.markdown("""
         <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">4️</h3>
+            <h3 style="color: #FFFFFF; margin: 0;">4️⃣</h3>
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Normalization<br>[0, 1]</p>
         </div>
         """, unsafe_allow_html=True)
@@ -290,7 +290,7 @@ elif page == "📂 Dataset":
 # ==========================================
 # 🧠 AI MODELS
 # ==========================================
-elif page == "🧠 AI Models":
+elif page == " AI Models":
     st.markdown("### 🏆 Model Rankings & Performance")
     st.write("Three architectures were rigorously evaluated and ranked based on F1-Score (clinical relevance).")
     
@@ -320,7 +320,7 @@ elif page == "🧠 AI Models":
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    st.markdown("###  Model Selection Criteria")
+    st.markdown("### 📋 Model Selection Criteria")
     st.markdown("""
     | Criteria | Baseline CNN | MobileNetV2 | ResNet50 |
     |---|---|---|---|
@@ -346,7 +346,7 @@ elif page == "📈 Results":
         'F1-Score': [0.000, 0.188, 0.065]
     })
 
-    st.markdown("### 📈 Multi-Metric Comparison")
+    st.markdown("###  Multi-Metric Comparison")
     fig_metrics = go.Figure()
     for metric in ['Accuracy', 'Precision', 'Recall', 'F1-Score']:
         fig_metrics.add_trace(go.Bar(
@@ -405,7 +405,7 @@ elif page == "📈 Results":
     </div>
     """, unsafe_allow_html=True)
 
-    # ADDED: Metrics Explanation Expander (MOVED HERE FROM AI DIAGNOSIS)
+    # Metrics Explanation Expander (Placed here as requested)
     with st.expander("📊 Understanding Evaluation Metrics"):
         st.markdown("""
         **🎯 Accuracy**: Overall correctness of predictions (Total Correct / Total Predictions)
@@ -414,7 +414,7 @@ elif page == "📈 Results":
         
         **🎯 Recall (Sensitivity)**: Of all actual cavities, how many did we detect? (True Positives / (True Positives + False Negatives))
         
-        **🎯 F1-Score**: Harmonic mean of Precision and Recall. Balances both metrics for a comprehensive evaluation.
+        ** F1-Score**: Harmonic mean of Precision and Recall. Balances both metrics for a comprehensive evaluation.
         
         **🎯 Threshold**: The probability cutoff (0.35) used to classify predictions. Lower threshold = more sensitive detection.
         """)
@@ -467,9 +467,9 @@ elif page == "🔬 AI Diagnosis":
             # Simulate processing time
             with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
-            with st.spinner(' Step 2: Running CNN Inference...'):
+            with st.spinner('🧠 Step 2: Running CNN Inference...'):
                 time.sleep(0.4)
-            with st.spinner('🔥 Step 3: Generating Grad-CAM Heatmap...'):
+            with st.spinner(' Step 3: Generating Grad-CAM Heatmap...'):
                 time.sleep(0.4)
                 
                 if TF_AVAILABLE:
@@ -557,7 +557,7 @@ elif page == "🔬 AI Diagnosis":
                     """, unsafe_allow_html=True)
                     
             with cam_col:
-                st.markdown("####  Explainable AI Overlay")
+                st.markdown("#### 🔥 Explainable AI Overlay")
                 st.image(heatmap_img, caption="Grad-CAM Attention Heatmap (Red = High Focus)", use_column_width=True)
                 if not TF_AVAILABLE:
                     st.caption("*Note: Heatmap simulated for cloud demonstration. Localhost uses real Grad-CAM.*")
@@ -574,7 +574,7 @@ elif page == "🔬 AI Diagnosis":
             </div>
             """, unsafe_allow_html=True)
             
-            st.info("👆 Upload a radiograph to begin analysis.")
+            st.info(" Upload a radiograph to begin analysis.")
 
 # ==========================================
 # ℹ️ ABOUT
@@ -627,7 +627,7 @@ elif page == "ℹ️ About":
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("""
     <div class="info-box">
-    <strong>️ Clinical Disclaimer:</strong> This system is designed as an <strong>educational and assistive prototype</strong> 
+    <strong>⚠️ Clinical Disclaimer:</strong> This system is designed as an <strong>educational and assistive prototype</strong> 
     for Final Year Project demonstration purposes. It does <strong>not</strong> replace professional clinical judgment, 
     radiographic interpretation, or established diagnostic protocols. Always verify AI findings with qualified dental practitioners.
     </div>
