@@ -184,6 +184,15 @@ if page == "🏠 Dashboard":
         """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
+    
+    st.markdown("### ✅ Core Objectives")
+    st.markdown("""
+    1. **Review** current techniques for identifying dental caries in radiographic images.
+    2. **Develop** an AI-driven system utilizing Transfer Learning (CNNs) to detect caries from dental X-rays.
+    3. **Evaluate** the system's accuracy and implement **Explainable AI (Grad-CAM)** to build clinical trust.
+    """)
+
+    st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### 🧠 Quick Knowledge Check")
     st.markdown("**What percentage of Malaysian adults suffer from dental caries?**")
     options = ["65.2%", "75.8%", "85.1%", "92.3%"]
