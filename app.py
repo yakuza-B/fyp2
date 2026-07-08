@@ -288,7 +288,7 @@ elif page == "📂 Dataset":
         """)
 
 # ==========================================
-# 🧠 AI MODELS (UPDATED WITH CORRECT RANKINGS)
+# 🧠 AI MODELS
 # ==========================================
 elif page == "🧠 AI Models":
     st.markdown("### 🏆 Model Rankings & Performance")
@@ -332,7 +332,7 @@ elif page == "🧠 AI Models":
     """)
 
 # ==========================================
-# 📈 RESULTS (UPDATED WITH CORRECT NUMBERS)
+# 📈 RESULTS
 # ==========================================
 elif page == "📈 Results":
     st.markdown("### 📊 Performance Evaluation & Threshold Optimization")
@@ -406,7 +406,7 @@ elif page == "📈 Results":
     """, unsafe_allow_html=True)
 
 # ==========================================
-# 🔬 AI DIAGNOSIS (PREDICTION TOOL)
+# 🔬 AI DIAGNOSIS (PREDICTION TOOL) - THRESHOLD TEXT REMOVED
 # ==========================================
 elif page == "🔬 AI Diagnosis":
     st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
@@ -547,8 +547,6 @@ elif page == "🔬 AI Diagnosis":
                 st.image(heatmap_img, caption="Grad-CAM Attention Heatmap (Red = High Focus)", use_column_width=True)
                 if not TF_AVAILABLE:
                     st.caption("*Note: Heatmap simulated for cloud demonstration. Localhost uses real Grad-CAM.*")
-                    
-            st.markdown(f"*Threshold: {OPTIMAL_THRESHOLD:.2f} | Optimized for Medical Sensitivity*")
 
         else:
             st.markdown("""
