@@ -204,6 +204,16 @@ if page == "🏠 Dashboard":
         else:
             st.error("❌ Incorrect. The correct answer is 85.1% - highlighting the critical need for automated detection!")
 
+    # ADDED: Clinical Disclaimer on the first page
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="info-box">
+    <strong>⚠️ Clinical Disclaimer:</strong> This system is designed as an <strong>educational and assistive prototype</strong> 
+    for Final Year Project demonstration purposes. It does <strong>not</strong> replace professional clinical judgment, 
+    radiographic interpretation, or established diagnostic protocols. Always verify AI findings with qualified dental practitioners.
+    </div>
+    """, unsafe_allow_html=True)
+
 # ==========================================
 # 📂 DATASET
 # ==========================================
