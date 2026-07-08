@@ -134,12 +134,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# SIDEBAR NAVIGATION (FIXED ROUTING)
+# SIDEBAR NAVIGATION
 # ==========================================
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", " Results", "🔬 AI Diagnosis", "️ About"],
+    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
     label_visibility="collapsed",
     index=0
 )
@@ -215,7 +215,7 @@ elif page == "📂 Dataset":
     with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
-    with col4: st.metric(label=" Resolution", value="224x224", delta="Pixels")
+    with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### ⚖️ Class Distribution")
@@ -290,7 +290,7 @@ elif page == "📂 Dataset":
 # ==========================================
 # 🧠 AI MODELS
 # ==========================================
-elif page == " AI Models":
+elif page == "🧠 AI Models":
     st.markdown("### 🏆 Model Rankings & Performance")
     st.write("Three architectures were rigorously evaluated and ranked based on F1-Score (clinical relevance).")
     
@@ -346,7 +346,7 @@ elif page == "📈 Results":
         'F1-Score': [0.000, 0.188, 0.065]
     })
 
-    st.markdown("###  Multi-Metric Comparison")
+    st.markdown("### 📈 Multi-Metric Comparison")
     fig_metrics = go.Figure()
     for metric in ['Accuracy', 'Precision', 'Recall', 'F1-Score']:
         fig_metrics.add_trace(go.Bar(
@@ -405,20 +405,6 @@ elif page == "📈 Results":
     </div>
     """, unsafe_allow_html=True)
 
-    # Metrics Explanation Expander (Placed here as requested)
-    with st.expander("📊 Understanding Evaluation Metrics"):
-        st.markdown("""
-        **🎯 Accuracy**: Overall correctness of predictions (Total Correct / Total Predictions)
-        
-        **🎯 Precision**: Of all predicted cavities, how many were actually cavities? (True Positives / (True Positives + False Positives))
-        
-        **🎯 Recall (Sensitivity)**: Of all actual cavities, how many did we detect? (True Positives / (True Positives + False Negatives))
-        
-        ** F1-Score**: Harmonic mean of Precision and Recall. Balances both metrics for a comprehensive evaluation.
-        
-        **🎯 Threshold**: The probability cutoff (0.35) used to classify predictions. Lower threshold = more sensitive detection.
-        """)
-
 # ==========================================
 # 🔬 AI DIAGNOSIS (PREDICTION TOOL)
 # ==========================================
@@ -469,7 +455,7 @@ elif page == "🔬 AI Diagnosis":
                 time.sleep(0.4)
             with st.spinner('🧠 Step 2: Running CNN Inference...'):
                 time.sleep(0.4)
-            with st.spinner(' Step 3: Generating Grad-CAM Heatmap...'):
+            with st.spinner('🔥 Step 3: Generating Grad-CAM Heatmap...'):
                 time.sleep(0.4)
                 
                 if TF_AVAILABLE:
@@ -574,7 +560,7 @@ elif page == "🔬 AI Diagnosis":
             </div>
             """, unsafe_allow_html=True)
             
-            st.info(" Upload a radiograph to begin analysis.")
+            st.info("👆 Upload a radiograph to begin analysis.")
 
 # ==========================================
 # ℹ️ ABOUT
