@@ -128,7 +128,7 @@ st.markdown("""
 # ==========================================
 st.markdown("""
 <div class="app-header">
-    <h1> AI Dental Caries Detection System</h1>
+    <h1>🦷 AI Dental Caries Detection System</h1>
     <p>University of Wollongong Malaysia | Final Year Project 2024</p>
 </div>
 """, unsafe_allow_html=True)
@@ -145,7 +145,7 @@ page = st.sidebar.radio(
 )
 
 # ==========================================
-#  DASHBOARD
+# 🏠 DASHBOARD
 # ==========================================
 if page == "🏠 Dashboard":
     st.markdown("### 🎯 Project Overview")
@@ -156,7 +156,7 @@ if page == "🏠 Dashboard":
     """)
     
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 🌍 Burden of Disease")
+    st.markdown("###  Burden of Disease")
     c1, c2, c3 = st.columns(3)
     
     with c1:
@@ -208,18 +208,18 @@ if page == "🏠 Dashboard":
 # ==========================================
 # 📂 DATASET
 # ==========================================
-elif page == " Dataset":
-    st.markdown("###  Dataset Overview & Preprocessing")
+elif page == "📂 Dataset":
+    st.markdown("### 📊 Dataset Overview & Preprocessing")
     st.write("Curated dental radiograph dataset with expert annotations, strictly processed for medical AI standards.")
     
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric(label=" Total Images", value="500+", delta="Curated")
+    with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
     with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ️ Class Distribution")
+    st.markdown("### ⚖️ Class Distribution")
     st.write("Medical datasets are inherently imbalanced. We applied **Class Weights** during training to prevent bias toward the majority class.")
     
     dist_data = pd.DataFrame({
@@ -255,7 +255,7 @@ elif page == " Dataset":
     with step1:
         st.markdown("""
         <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">1️⃣</h3>
+            <h3 style="color: #FFFFFF; margin: 0;">1️</h3>
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Grayscale<br>Conversion</p>
         </div>
         """, unsafe_allow_html=True)
@@ -276,7 +276,7 @@ elif page == " Dataset":
     with step4:
         st.markdown("""
         <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">4️⃣</h3>
+            <h3 style="color: #FFFFFF; margin: 0;">4️</h3>
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Normalization<br>[0, 1]</p>
         </div>
         """, unsafe_allow_html=True)
@@ -296,7 +296,7 @@ elif page == "🧠 AI Models":
     st.write("Three architectures were rigorously evaluated and ranked based on overall clinical performance.")
     
     # Model Rankings
-    st.markdown("####  Top 1: Baseline CNN (GAP)")
+    st.markdown("#### 🥇 Top 1: Baseline CNN (GAP)")
     st.markdown("""
     <div class="success-box">
     <strong>Custom 3-layer ConvNet with Global Average Pooling</strong><br>
@@ -456,7 +456,7 @@ elif page == " AI Diagnosis":
             # Simulate processing time
             with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
-            with st.spinner(' Step 2: Running CNN Inference...'):
+            with st.spinner('🧠 Step 2: Running CNN Inference...'):
                 time.sleep(0.4)
             with st.spinner('🔥 Step 3: Generating Grad-CAM Heatmap...'):
                 time.sleep(0.4)
@@ -523,13 +523,13 @@ elif page == " AI Diagnosis":
             confidence = prediction_prob if is_cavity else (1 - prediction_prob)
             
             st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown("### 🩺 Diagnostic Report")
+            st.markdown("###  Diagnostic Report")
             
             diag_col, cam_col = st.columns(2)
             
             with diag_col:
                 if is_cavity:
-                    st.error(f" **CARIES DETECTED** \n\n Confidence: {confidence*100:.1f}%")
+                    st.error(f"🚨 **CARIES DETECTED** \n\n Confidence: {confidence*100:.1f}%")
                     st.markdown("""
                     <div class="warning-box">
                     <strong>Clinical Recommendation:</strong> AI identified radiolucent patterns consistent with dental caries. 
@@ -588,7 +588,7 @@ elif page == "ℹ️ About":
         # Added a single <br> for a little spacing
         st.markdown("<br>", unsafe_allow_html=True)
         
-        st.markdown("#### 👨‍ Supervision")
+        st.markdown("#### 👨‍🏫 Supervision")
         st.markdown("""
         <div style='line-height: 2.2;'>
         <b>Main Supervisor:</b> Mr Chua Hiang Kiat<br>
@@ -597,7 +597,7 @@ elif page == "ℹ️ About":
         """, unsafe_allow_html=True)
         
     with col2:
-        st.markdown("#### ️ Technology ")
+        st.markdown("#### 🛠️ Technology ")
         st.markdown("""
         - **Language:** Python 3.11
         - **Deep Learning:** TensorFlow 2.15, Keras
@@ -608,7 +608,7 @@ elif page == "ℹ️ About":
         """)
         
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("#### 📚 Key References")
+    st.markdown("####  Key References")
     st.markdown("""
     1. World Health Organization. (2022). *Global Oral Health Status Report*.
     2. National Oral Health Survey of Adults (NOHSA). (2020). *Malaysia Ministry of Health*.
@@ -631,7 +631,7 @@ elif page == "ℹ️ About":
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center; color: #64748B; padding: 20px; border-top: 1px solid #334155; margin-top: 40px; font-size: 14px;'>
-    <p> Automated Detection of Dental Caries from Dental X-ray Images | FYP2 2024</p>
+    <p>🦷 Automated Detection of Dental Caries from Dental X-ray Images | FYP2 2024</p>
     <p>Developed by Barry Ng Kee Hong (0135374) | University of Wollongong Malaysia</p>
 </div>
 """, unsafe_allow_html=True)
