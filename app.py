@@ -134,18 +134,18 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# SIDEBAR NAVIGATION (FIXED ROUTING)
+# SIDEBAR NAVIGATION (EMOJIS FIXED HERE)
 # ==========================================
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", " Results", "🔬 AI Diagnosis", "️ About"],
+    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
     label_visibility="collapsed",
     index=0
 )
 
 # ==========================================
-# 🏠 DASHBOARD
+#  DASHBOARD
 # ==========================================
 if page == "🏠 Dashboard":
     st.markdown("### 🎯 Project Overview")
@@ -205,17 +205,17 @@ if page == "🏠 Dashboard":
     """, unsafe_allow_html=True)
 
 # ==========================================
-# 📂 DATASET
+# 📂 DATASET (EMOJIS FIXED HERE)
 # ==========================================
 elif page == "📂 Dataset":
     st.markdown("### 📊 Dataset Overview & Preprocessing")
     st.write("Curated dental radiograph dataset with expert annotations, strictly processed for medical AI standards.")
     
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
+    with col1: st.metric(label=" Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
-    with col4: st.metric(label=" Resolution", value="224x224", delta="Pixels")
+    with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### ⚖️ Class Distribution")
@@ -290,7 +290,7 @@ elif page == "📂 Dataset":
 # ==========================================
 # 🧠 AI MODELS
 # ==========================================
-elif page == " AI Models":
+elif page == "🧠 AI Models":
     st.markdown("### 🏆 Model Rankings & Performance")
     st.write("Three architectures were rigorously evaluated and ranked based on F1-Score (clinical relevance).")
     
@@ -346,7 +346,7 @@ elif page == "📈 Results":
         'F1-Score': [0.000, 0.188, 0.065]
     })
 
-    st.markdown("###  Multi-Metric Comparison")
+    st.markdown("### 📈 Multi-Metric Comparison")
     fig_metrics = go.Figure()
     for metric in ['Accuracy', 'Precision', 'Recall', 'F1-Score']:
         fig_metrics.add_trace(go.Bar(
@@ -405,10 +405,10 @@ elif page == "📈 Results":
     </div>
     """, unsafe_allow_html=True)
 
-    # Metrics Explanation Expander (Placed here as requested)
+    # Metrics Explanation Expander
     with st.expander("📊 Understanding Evaluation Metrics"):
         st.markdown("""
-        **🎯 Accuracy**: Overall correctness of predictions (Total Correct / Total Predictions)
+        ** Accuracy**: Overall correctness of predictions (Total Correct / Total Predictions)
         
         **🎯 Precision**: Of all predicted cavities, how many were actually cavities? (True Positives / (True Positives + False Positives))
         
@@ -420,7 +420,7 @@ elif page == "📈 Results":
         """)
 
 # ==========================================
-# 🔬 AI DIAGNOSIS (PREDICTION TOOL)
+# 🔬 AI DIAGNOSIS
 # ==========================================
 elif page == "🔬 AI Diagnosis":
     st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
@@ -565,7 +565,7 @@ elif page == "🔬 AI Diagnosis":
         else:
             st.markdown("""
             <div class="info-box">
-                <h4>📖 How to Use This Tool</h4>
+                <h4> How to Use This Tool</h4>
                 <p>1. Upload a digital dental radiograph (JPG/PNG format).</p>
                 <p>2. System applies <strong>CLAHE contrast enhancement</strong> to highlight subtle lesions.</p>
                 <p>3. CNN analyzes image and returns <strong>binary classification</strong> with confidence score.</p>
@@ -574,7 +574,7 @@ elif page == "🔬 AI Diagnosis":
             </div>
             """, unsafe_allow_html=True)
             
-            st.info(" Upload a radiograph to begin analysis.")
+            st.info("👆 Upload a radiograph to begin analysis.")
 
 # ==========================================
 # ℹ️ ABOUT
