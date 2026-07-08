@@ -128,7 +128,7 @@ st.markdown("""
 # ==========================================
 st.markdown("""
 <div class="app-header">
-    <h1> AI Dental Caries Detection System</h1>
+    <h1>🦷 AI Dental Caries Detection System</h1>
     <p>University of Wollongong Malaysia | Final Year Project 2024</p>
 </div>
 """, unsafe_allow_html=True)
@@ -205,7 +205,7 @@ if page == "🏠 Dashboard":
     """, unsafe_allow_html=True)
 
 # ==========================================
-# 📂 DATASET (FIXED EMOJI HERE)
+# 📂 DATASET
 # ==========================================
 elif page == "📂 Dataset":
     st.markdown("### 📊 Dataset Overview & Preprocessing")
@@ -214,7 +214,7 @@ elif page == "📂 Dataset":
     col1, col2, col3, col4 = st.columns(4)
     with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
-    with col3: st.metric(label=" Cavity", value="150", delta="30%")
+    with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
     with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -275,7 +275,7 @@ elif page == "📂 Dataset":
     with step4:
         st.markdown("""
         <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">4️</h3>
+            <h3 style="color: #FFFFFF; margin: 0;">4️⃣</h3>
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Normalization<br>[0, 1]</p>
         </div>
         """, unsafe_allow_html=True)
@@ -288,33 +288,33 @@ elif page == "📂 Dataset":
         """)
 
 # ==========================================
-#  AI MODELS
+# 🧠 AI MODELS (UPDATED WITH CORRECT RANKINGS)
 # ==========================================
 elif page == "🧠 AI Models":
     st.markdown("### 🏆 Model Rankings & Performance")
-    st.write("Three architectures were rigorously evaluated and ranked based on overall clinical performance.")
+    st.write("Three architectures were rigorously evaluated and ranked based on F1-Score (clinical relevance).")
     
-    st.markdown("#### 🥇 Top 1: Baseline CNN (GAP)")
+    st.markdown("#### 🥇 Top 1: MobileNetV2 (Winner)")
     st.markdown("""
     <div class="success-box">
-    <strong>Custom 3-layer ConvNet with Global Average Pooling</strong><br>
-    Lightweight architecture prevents overfitting. Built-in data augmentation (rotation, zoom, contrast) improves generalization on limited medical data, making it the most stable and reliable choice for this specific dataset.
+    <strong>Transfer Learning with Fine-Tuning</strong><br>
+    Achieved the highest F1-Score (0.188) and Recall (25%). Despite lower overall accuracy, it successfully learned to detect the minority 'Cavity' class. This proves that transfer learning is highly effective for small medical datasets.
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("#### 🥈 Top 2: MobileNetV2")
+    st.markdown("#### 🥈 Top 2: ResNet50")
     st.markdown("""
     <div class="info-box">
-    <strong>Transfer Learning with Fine-Tuning</strong><br>
-    Pre-trained on ImageNet. Showed marginal improvement after fine-tuning the top 20 layers, but remained outperformed by the simpler Baseline CNN due to the specific nature of our CLAHE-preprocessed grayscale images.
+    <strong>Deep Transfer Learning Architecture</strong><br>
+    Achieved a low F1-Score (0.065). While it detected a few cavities, its massive 23M parameters caused it to overfit and struggle with the CLAHE-preprocessed grayscale images.
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("#### 🥉 Top 3: ResNet50")
+    st.markdown("#### 🥉 Top 3: Baseline CNN (Failed)")
     st.markdown("""
     <div class="warning-box">
-    <strong>Deep Transfer Learning Architecture</strong><br>
-    Failed completely due to the "curse of dimensionality" (23M parameters is too complex for our dataset size). Additionally, applying CLAHE contrast enhancement disrupted ResNet's pre-trained ImageNet weight distributions.
+    <strong>Custom 3-layer ConvNet</strong><br>
+    Achieved 83.6% accuracy but 0% Recall. This is the "Accuracy Paradox"—the model simply learned to predict "No Cavity" for every image to maximize accuracy, completely failing to detect the disease.
     </div>
     """, unsafe_allow_html=True)
     
@@ -326,13 +326,13 @@ elif page == "🧠 AI Models":
     |---|---|---|---|
     | **Parameters** | ~1.2M | ~14M | ~23M |
     | **Training Stability** | High | Moderate | Low |
-    | **Clinical Recall** | 42% | 42% | 0% |
+    | **Clinical Recall** | 0% | 25% | 8.3% |
     | **Deployment Speed** | Fast | Moderate | Slow |
     | **Explainability** | Excellent | Good | Poor |
     """)
 
 # ==========================================
-#  RESULTS
+# 📈 RESULTS (UPDATED WITH CORRECT NUMBERS)
 # ==========================================
 elif page == "📈 Results":
     st.markdown("### 📊 Performance Evaluation & Threshold Optimization")
@@ -340,10 +340,10 @@ elif page == "📈 Results":
 
     model_results = pd.DataFrame({
         'Model': ['Baseline CNN', 'MobileNetV2', 'ResNet50'],
-        'Accuracy': [0.76, 0.74, 0.64],
-        'Precision': [0.33, 0.29, 0.00],
-        'Recall': [0.42, 0.42, 0.00],
-        'F1-Score': [0.37, 0.34, 0.00]
+        'Accuracy': [0.836, 0.644, 0.603],
+        'Precision': [0.000, 0.150, 0.053],
+        'Recall': [0.000, 0.250, 0.083],
+        'F1-Score': [0.000, 0.188, 0.065]
     })
 
     st.markdown("### 📈 Multi-Metric Comparison")
@@ -372,7 +372,7 @@ elif page == "📈 Results":
     st.plotly_chart(fig_metrics, use_container_width=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ️ Radar Analysis")
+    st.markdown("### 🕸️ Radar Analysis")
     st.write("Holistic view of model strengths across all evaluation dimensions.")
     
     fig_radar = go.Figure()
@@ -406,7 +406,7 @@ elif page == "📈 Results":
     """, unsafe_allow_html=True)
 
 # ==========================================
-# 🔬 AI DIAGNOSIS (PREDICTION TOOL) (FIXED EMOJI HERE)
+# 🔬 AI DIAGNOSIS (PREDICTION TOOL)
 # ==========================================
 elif page == "🔬 AI Diagnosis":
     st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
@@ -451,7 +451,7 @@ elif page == "🔬 AI Diagnosis":
             st.image(image, caption="Uploaded Radiograph", use_column_width=True)
             
             # Simulate processing time
-            with st.spinner(' Step 1: Applying CLAHE Enhancement...'):
+            with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
             with st.spinner('🧠 Step 2: Running CNN Inference...'):
                 time.sleep(0.4)
@@ -520,7 +520,7 @@ elif page == "🔬 AI Diagnosis":
             confidence = prediction_prob if is_cavity else (1 - prediction_prob)
             
             st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown("###  Diagnostic Report")
+            st.markdown("### 🩺 Diagnostic Report")
             
             diag_col, cam_col = st.columns(2)
             
