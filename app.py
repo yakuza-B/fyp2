@@ -443,6 +443,20 @@ elif page == "🔬 AI Diagnosis":
             else:
                 TF_AVAILABLE = False
 
+        # ADDED: Metrics Explanation Expander
+        with st.expander("📊 Understanding Evaluation Metrics"):
+            st.markdown("""
+            **🎯 Accuracy**: Overall correctness of predictions (Total Correct / Total Predictions)
+            
+            **🎯 Precision**: Of all predicted cavities, how many were actually cavities? (True Positives / (True Positives + False Positives))
+            
+            **🎯 Recall (Sensitivity)**: Of all actual cavities, how many did we detect? (True Positives / (True Positives + False Negatives))
+            
+            **🎯 F1-Score**: Harmonic mean of Precision and Recall. Balances both metrics for a comprehensive evaluation.
+            
+            **🎯 Threshold**: The probability cutoff (0.35) used to classify predictions. Lower threshold = more sensitive detection.
+            """)
+
     with col2:
         if uploaded_file is not None:
             # Open image with PIL
