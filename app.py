@@ -292,41 +292,82 @@ elif page == "📂 Dataset":
 # 🧠 AI MODELS
 # ==========================================
 elif page == "🧠 AI Models":
-    st.markdown("### 🏗️ Architecture & Methodology")
-    st.write("Three architectures were rigorously evaluated to determine the optimal clinical deployment model.")
+    st.markdown("### 🏆 Model Rankings & Performance")
+    st.write("Three architectures were rigorously evaluated and ranked based on overall clinical performance.")
     
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("""
-        <div class="success-box">
-        <strong>✅ Baseline CNN (Winner)</strong><br>
-        Custom 3-layer ConvNet with Global Average Pooling. 
-        Lightweight architecture prevents overfitting. Built-in data augmentation 
-        (rotation, zoom, contrast) improves generalization on limited medical data.
-        </div>
-        """, unsafe_allow_html=True)
-        
-    with col2:
-        st.markdown("""
-        <div class="warning-box">
-        <strong>⚠️ ResNet50 & MobileNetV2</strong><br>
-        Transfer learning models struggled. ResNet50 (23M parameters) failed completely 
-        due to dataset size mismatch and CLAHE disrupting ImageNet weight distributions. 
-        MobileNetV2 showed marginal improvement after fine-tuning but remained outperformed.
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 📋 Model Selection Criteria")
+    # Model Rankings
+    st.markdown("#### 🥇 Top 1: Baseline CNN (GAP)")
     st.markdown("""
-    | Criteria | Baseline CNN | MobileNetV2 | ResNet50 |
-    |---|---|---|---|
-    | **Parameters** | ~1.2M | ~14M | ~23M |
-    | **Training Stability** | High | Moderate | Low |
-    | **Clinical Recall** | 42% | 42% | 0% |
-    | **Deployment Speed** | Fast | Moderate | Slow |
-    | **Explainability** | Excellent | Good | Poor |
-    """)
+    <div class="success-box">
+    <strong>Custom 3-layer ConvNet with Global Average Pooling</strong><br>
+    • Lightweight architecture prevents overfitting<br>
+    • Built-in data augmentation improves generalization<br>
+    • Best overall F1-Score: 0.37<br>
+    • Clinical Recall: 42%<br>
+    • Fast deployment speed
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("#### 🥈 Top 2: MobileNetV2")
+    st.markdown("""
+    <div class="info-box">
+    <strong>Transfer Learning with Fine-Tuning</strong><br>
+    • Pre-trained on ImageNet<br>
+    • Moderate performance after fine-tuning<br>
+    • F1-Score: 0.34<br>
+    • Clinical Recall: 42%<br>
+    • Moderate deployment speed
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("#### 🥉 Top 3: ResNet50")
+    st.markdown("""
+    <div class="warning-box">
+    <strong>Deep Transfer Learning Architecture</strong><br>
+    • 23M parameters (too complex for dataset)<br>
+    • Struggled with limited data size<br>
+    • F1-Score: 0.00<br>
+    • Clinical Recall: 0%<br>
+    • Slow deployment speed
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Comparison Chart at Bottom
+    st.markdown("### 📊 Model Performance Comparison")
+    
+    model_results = pd.DataFrame({
+        'Model': ['Baseline CNN', 'MobileNetV2', 'ResNet50'],
+        'Accuracy': [0.76, 0.74, 0.64],
+        'Precision': [0.33, 0.29, 0.00],
+        'Recall': [0.42, 0.42, 0.00],
+        'F1-Score': [0.37, 0.34, 0.00]
+    })
+    
+    fig_metrics = go.Figure()
+    for metric in ['Accuracy', 'Precision', 'Recall', 'F1-Score']:
+        fig_metrics.add_trace(go.Bar(
+            x=model_results['Model'],
+            y=model_results[metric],
+            name=metric,
+            text=model_results[metric].apply(lambda x: f'{x:.0%}'),
+            textposition='outside'
+        ))
+    
+    fig_metrics.update_layout(
+        barmode='group',
+        title='Model Performance Across Key Metrics',
+        yaxis_title='Score',
+        yaxis_tickformat='.0%',
+        template='plotly_dark',
+        plot_bgcolor='#0E1117',
+        paper_bgcolor='#0E1117',
+        font=dict(color='#FFFFFF'),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        height=450
+    )
+    st.plotly_chart(fig_metrics, use_container_width=True)
 
 # ==========================================
 # 📈 RESULTS
