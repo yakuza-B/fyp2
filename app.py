@@ -145,7 +145,7 @@ page = st.sidebar.radio(
 )
 
 # ==========================================
-# 🏠 DASHBOARD
+#  DASHBOARD
 # ==========================================
 if page == "🏠 Dashboard":
     st.markdown("### 🎯 Project Overview")
@@ -156,7 +156,7 @@ if page == "🏠 Dashboard":
     """)
     
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("###  Burden of Disease")
+    st.markdown("### 🌍 Burden of Disease")
     c1, c2, c3 = st.columns(3)
     
     with c1:
@@ -195,7 +195,6 @@ if page == "🏠 Dashboard":
         else:
             st.error("❌ Incorrect. The correct answer is 85.1% - highlighting the critical need for automated detection!")
 
-    # ADDED: Clinical Disclaimer on the first page
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("""
     <div class="info-box">
@@ -208,18 +207,18 @@ if page == "🏠 Dashboard":
 # ==========================================
 # 📂 DATASET
 # ==========================================
-elif page == "📂 Dataset":
-    st.markdown("### 📊 Dataset Overview & Preprocessing")
+elif page == " Dataset":
+    st.markdown("###  Dataset Overview & Preprocessing")
     st.write("Curated dental radiograph dataset with expert annotations, strictly processed for medical AI standards.")
     
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
+    with col1: st.metric(label=" Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
     with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ⚖️ Class Distribution")
+    st.markdown("### ️ Class Distribution")
     st.write("Medical datasets are inherently imbalanced. We applied **Class Weights** during training to prevent bias toward the majority class.")
     
     dist_data = pd.DataFrame({
@@ -255,7 +254,7 @@ elif page == "📂 Dataset":
     with step1:
         st.markdown("""
         <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">1️</h3>
+            <h3 style="color: #FFFFFF; margin: 0;">1️⃣</h3>
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Grayscale<br>Conversion</p>
         </div>
         """, unsafe_allow_html=True)
@@ -276,7 +275,7 @@ elif page == "📂 Dataset":
     with step4:
         st.markdown("""
         <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">4️</h3>
+            <h3 style="color: #FFFFFF; margin: 0;">4️⃣</h3>
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Normalization<br>[0, 1]</p>
         </div>
         """, unsafe_allow_html=True)
@@ -295,7 +294,6 @@ elif page == "🧠 AI Models":
     st.markdown("### 🏆 Model Rankings & Performance")
     st.write("Three architectures were rigorously evaluated and ranked based on overall clinical performance.")
     
-    # Model Rankings
     st.markdown("#### 🥇 Top 1: Baseline CNN (GAP)")
     st.markdown("""
     <div class="success-box">
@@ -322,8 +320,7 @@ elif page == "🧠 AI Models":
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # Comparison Table at Bottom
-    st.markdown("### 📋 Model Selection Criteria")
+    st.markdown("###  Model Selection Criteria")
     st.markdown("""
     | Criteria | Baseline CNN | MobileNetV2 | ResNet50 |
     |---|---|---|---|
@@ -349,7 +346,7 @@ elif page == "📈 Results":
         'F1-Score': [0.37, 0.34, 0.00]
     })
 
-    st.markdown("###  Multi-Metric Comparison")
+    st.markdown("### 📈 Multi-Metric Comparison")
     fig_metrics = go.Figure()
     for metric in ['Accuracy', 'Precision', 'Recall', 'F1-Score']:
         fig_metrics.add_trace(go.Bar(
@@ -411,7 +408,7 @@ elif page == "📈 Results":
 # ==========================================
 # 🔬 AI DIAGNOSIS (PREDICTION TOOL)
 # ==========================================
-elif page == " AI Diagnosis":
+elif page == "🔬 AI Diagnosis":
     st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
     st.write("Upload a dental radiograph for instant analysis, confidence scoring, and explainable heatmap visualization.")
 
@@ -425,7 +422,7 @@ elif page == " AI Diagnosis":
     col1, col2 = st.columns([1, 2])
 
     with col1:
-        st.markdown("### 📤 Upload Radiograph")
+        st.markdown("###  Upload Radiograph")
         uploaded_file = st.file_uploader(
             "Drag & drop or click to upload", 
             type=["jpg", "jpeg", "png"],
@@ -585,10 +582,9 @@ elif page == "ℹ️ About":
         </div>
         """, unsafe_allow_html=True)
         
-        # Added a single <br> for a little spacing
         st.markdown("<br>", unsafe_allow_html=True)
         
-        st.markdown("#### 👨‍🏫 Supervision")
+        st.markdown("#### 👨‍ Supervision")
         st.markdown("""
         <div style='line-height: 2.2;'>
         <b>Main Supervisor:</b> Mr Chua Hiang Kiat<br>
@@ -608,7 +604,7 @@ elif page == "ℹ️ About":
         """)
         
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("####  Key References")
+    st.markdown("#### 📚 Key References")
     st.markdown("""
     1. World Health Organization. (2022). *Global Oral Health Status Report*.
     2. National Oral Health Survey of Adults (NOHSA). (2020). *Malaysia Ministry of Health*.
