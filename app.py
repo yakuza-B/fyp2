@@ -145,7 +145,7 @@ page = st.sidebar.radio(
 )
 
 # ==========================================
-# 🏠 DASHBOARD
+#  DASHBOARD
 # ==========================================
 if page == "🏠 Dashboard":
     st.markdown("### 🎯 Project Overview")
@@ -156,7 +156,7 @@ if page == "🏠 Dashboard":
     """)
     
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 🌍 Burden of Disease")
+    st.markdown("###  Burden of Disease")
     c1, c2, c3 = st.columns(3)
     
     with c1:
@@ -288,7 +288,7 @@ elif page == "📂 Dataset":
         """)
 
 # ==========================================
-# 🧠 AI MODELS (UPDATED WITH CORRECT RANKINGS)
+# 🧠 AI MODELS
 # ==========================================
 elif page == "🧠 AI Models":
     st.markdown("### 🏆 Model Rankings & Performance")
@@ -332,7 +332,7 @@ elif page == "🧠 AI Models":
     """)
 
 # ==========================================
-# 📈 RESULTS (UPDATED WITH CORRECT NUMBERS)
+# 📈 RESULTS
 # ==========================================
 elif page == "📈 Results":
     st.markdown("### 📊 Performance Evaluation & Threshold Optimization")
@@ -406,9 +406,9 @@ elif page == "📈 Results":
     """, unsafe_allow_html=True)
 
 # ==========================================
-# 🔬 AI DIAGNOSIS (PREDICTION TOOL)
+# 🔬 AI DIAGNOSIS (PREDICTION TOOL) - THRESHOLD TEXT REMOVED
 # ==========================================
-elif page == "🔬 AI Diagnosis":
+elif page == " AI Diagnosis":
     st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
     st.write("Upload a dental radiograph for instant analysis, confidence scoring, and explainable heatmap visualization.")
 
@@ -520,7 +520,7 @@ elif page == "🔬 AI Diagnosis":
             confidence = prediction_prob if is_cavity else (1 - prediction_prob)
             
             st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown("### 🩺 Diagnostic Report")
+            st.markdown("###  Diagnostic Report")
             
             diag_col, cam_col = st.columns(2)
             
@@ -547,8 +547,6 @@ elif page == "🔬 AI Diagnosis":
                 st.image(heatmap_img, caption="Grad-CAM Attention Heatmap (Red = High Focus)", use_column_width=True)
                 if not TF_AVAILABLE:
                     st.caption("*Note: Heatmap simulated for cloud demonstration. Localhost uses real Grad-CAM.*")
-                    
-            st.markdown(f"*Threshold: {OPTIMAL_THRESHOLD:.2f} | Optimized for Medical Sensitivity*")
 
         else:
             st.markdown("""
@@ -593,7 +591,7 @@ elif page == "ℹ️ About":
         """, unsafe_allow_html=True)
         
     with col2:
-        st.markdown("#### 🛠️ Technology ")
+        st.markdown("#### ️ Technology ")
         st.markdown("""
         - **Language:** Python 3.11
         - **Deep Learning:** TensorFlow 2.15, Keras
