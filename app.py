@@ -128,7 +128,7 @@ st.markdown("""
 # ==========================================
 st.markdown("""
 <div class="app-header">
-    <h1>🦷 AI Dental Caries Detection System</h1>
+    <h1> AI Dental Caries Detection System</h1>
     <p>University of Wollongong Malaysia | Final Year Project 2024</p>
 </div>
 """, unsafe_allow_html=True)
@@ -145,7 +145,7 @@ page = st.sidebar.radio(
 )
 
 # ==========================================
-# 🏠 DASHBOARD
+#  DASHBOARD
 # ==========================================
 if page == "🏠 Dashboard":
     st.markdown("### 🎯 Project Overview")
@@ -208,18 +208,18 @@ if page == "🏠 Dashboard":
 # ==========================================
 # 📂 DATASET
 # ==========================================
-elif page == "📂 Dataset":
-    st.markdown("### 📊 Dataset Overview & Preprocessing")
+elif page == " Dataset":
+    st.markdown("###  Dataset Overview & Preprocessing")
     st.write("Curated dental radiograph dataset with expert annotations, strictly processed for medical AI standards.")
     
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
+    with col1: st.metric(label=" Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
     with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ⚖️ Class Distribution")
+    st.markdown("### ️ Class Distribution")
     st.write("Medical datasets are inherently imbalanced. We applied **Class Weights** during training to prevent bias toward the majority class.")
     
     dist_data = pd.DataFrame({
@@ -296,15 +296,11 @@ elif page == "🧠 AI Models":
     st.write("Three architectures were rigorously evaluated and ranked based on overall clinical performance.")
     
     # Model Rankings
-    st.markdown("#### 🥇 Top 1: Baseline CNN (GAP)")
+    st.markdown("####  Top 1: Baseline CNN (GAP)")
     st.markdown("""
     <div class="success-box">
     <strong>Custom 3-layer ConvNet with Global Average Pooling</strong><br>
-    • Lightweight architecture prevents overfitting<br>
-    • Built-in data augmentation improves generalization<br>
-    • Best overall F1-Score: 0.37<br>
-    • Clinical Recall: 42%<br>
-    • Fast deployment speed
+    Lightweight architecture prevents overfitting. Built-in data augmentation (rotation, zoom, contrast) improves generalization on limited medical data, making it the most stable and reliable choice for this specific dataset.
     </div>
     """, unsafe_allow_html=True)
     
@@ -312,11 +308,7 @@ elif page == "🧠 AI Models":
     st.markdown("""
     <div class="info-box">
     <strong>Transfer Learning with Fine-Tuning</strong><br>
-    • Pre-trained on ImageNet<br>
-    • Moderate performance after fine-tuning<br>
-    • F1-Score: 0.34<br>
-    • Clinical Recall: 42%<br>
-    • Moderate deployment speed
+    Pre-trained on ImageNet. Showed marginal improvement after fine-tuning the top 20 layers, but remained outperformed by the simpler Baseline CNN due to the specific nature of our CLAHE-preprocessed grayscale images.
     </div>
     """, unsafe_allow_html=True)
     
@@ -324,50 +316,23 @@ elif page == "🧠 AI Models":
     st.markdown("""
     <div class="warning-box">
     <strong>Deep Transfer Learning Architecture</strong><br>
-    • 23M parameters (too complex for dataset)<br>
-    • Struggled with limited data size<br>
-    • F1-Score: 0.00<br>
-    • Clinical Recall: 0%<br>
-    • Slow deployment speed
+    Failed completely due to the "curse of dimensionality" (23M parameters is too complex for our dataset size). Additionally, applying CLAHE contrast enhancement disrupted ResNet's pre-trained ImageNet weight distributions.
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # Comparison Chart at Bottom
-    st.markdown("### 📊 Model Performance Comparison")
-    
-    model_results = pd.DataFrame({
-        'Model': ['Baseline CNN', 'MobileNetV2', 'ResNet50'],
-        'Accuracy': [0.76, 0.74, 0.64],
-        'Precision': [0.33, 0.29, 0.00],
-        'Recall': [0.42, 0.42, 0.00],
-        'F1-Score': [0.37, 0.34, 0.00]
-    })
-    
-    fig_metrics = go.Figure()
-    for metric in ['Accuracy', 'Precision', 'Recall', 'F1-Score']:
-        fig_metrics.add_trace(go.Bar(
-            x=model_results['Model'],
-            y=model_results[metric],
-            name=metric,
-            text=model_results[metric].apply(lambda x: f'{x:.0%}'),
-            textposition='outside'
-        ))
-    
-    fig_metrics.update_layout(
-        barmode='group',
-        title='Model Performance Across Key Metrics',
-        yaxis_title='Score',
-        yaxis_tickformat='.0%',
-        template='plotly_dark',
-        plot_bgcolor='#0E1117',
-        paper_bgcolor='#0E1117',
-        font=dict(color='#FFFFFF'),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-        height=450
-    )
-    st.plotly_chart(fig_metrics, use_container_width=True)
+    # Comparison Table at Bottom
+    st.markdown("### 📋 Model Selection Criteria")
+    st.markdown("""
+    | Criteria | Baseline CNN | MobileNetV2 | ResNet50 |
+    |---|---|---|---|
+    | **Parameters** | ~1.2M | ~14M | ~23M |
+    | **Training Stability** | High | Moderate | Low |
+    | **Clinical Recall** | 42% | 42% | 0% |
+    | **Deployment Speed** | Fast | Moderate | Slow |
+    | **Explainability** | Excellent | Good | Poor |
+    """)
 
 # ==========================================
 # 📈 RESULTS
@@ -384,7 +349,7 @@ elif page == "📈 Results":
         'F1-Score': [0.37, 0.34, 0.00]
     })
 
-    st.markdown("### 📈 Multi-Metric Comparison")
+    st.markdown("###  Multi-Metric Comparison")
     fig_metrics = go.Figure()
     for metric in ['Accuracy', 'Precision', 'Recall', 'F1-Score']:
         fig_metrics.add_trace(go.Bar(
@@ -446,7 +411,7 @@ elif page == "📈 Results":
 # ==========================================
 # 🔬 AI DIAGNOSIS (PREDICTION TOOL)
 # ==========================================
-elif page == "🔬 AI Diagnosis":
+elif page == " AI Diagnosis":
     st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
     st.write("Upload a dental radiograph for instant analysis, confidence scoring, and explainable heatmap visualization.")
 
@@ -491,7 +456,7 @@ elif page == "🔬 AI Diagnosis":
             # Simulate processing time
             with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
-            with st.spinner('🧠 Step 2: Running CNN Inference...'):
+            with st.spinner(' Step 2: Running CNN Inference...'):
                 time.sleep(0.4)
             with st.spinner('🔥 Step 3: Generating Grad-CAM Heatmap...'):
                 time.sleep(0.4)
@@ -564,7 +529,7 @@ elif page == "🔬 AI Diagnosis":
             
             with diag_col:
                 if is_cavity:
-                    st.error(f"🚨 **CARIES DETECTED** \n\n Confidence: {confidence*100:.1f}%")
+                    st.error(f" **CARIES DETECTED** \n\n Confidence: {confidence*100:.1f}%")
                     st.markdown("""
                     <div class="warning-box">
                     <strong>Clinical Recommendation:</strong> AI identified radiolucent patterns consistent with dental caries. 
@@ -623,7 +588,7 @@ elif page == "ℹ️ About":
         # Added a single <br> for a little spacing
         st.markdown("<br>", unsafe_allow_html=True)
         
-        st.markdown("#### 👨‍🏫 Supervision")
+        st.markdown("#### 👨‍ Supervision")
         st.markdown("""
         <div style='line-height: 2.2;'>
         <b>Main Supervisor:</b> Mr Chua Hiang Kiat<br>
@@ -632,7 +597,7 @@ elif page == "ℹ️ About":
         """, unsafe_allow_html=True)
         
     with col2:
-        st.markdown("#### 🛠️ Technology ")
+        st.markdown("#### ️ Technology ")
         st.markdown("""
         - **Language:** Python 3.11
         - **Deep Learning:** TensorFlow 2.15, Keras
@@ -666,7 +631,7 @@ elif page == "ℹ️ About":
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center; color: #64748B; padding: 20px; border-top: 1px solid #334155; margin-top: 40px; font-size: 14px;'>
-    <p>🦷 Automated Detection of Dental Caries from Dental X-ray Images | FYP2 2024</p>
+    <p> Automated Detection of Dental Caries from Dental X-ray Images | FYP2 2024</p>
     <p>Developed by Barry Ng Kee Hong (0135374) | University of Wollongong Malaysia</p>
 </div>
 """, unsafe_allow_html=True)
