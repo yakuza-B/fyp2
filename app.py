@@ -128,7 +128,7 @@ st.markdown("""
 # ==========================================
 st.markdown("""
 <div class="app-header">
-    <h1>🦷 AI Dental Caries Detection System</h1>
+    <h1> AI Dental Caries Detection System</h1>
     <p>University of Wollongong Malaysia | Final Year Project 2024</p>
 </div>
 """, unsafe_allow_html=True)
@@ -145,7 +145,7 @@ page = st.sidebar.radio(
 )
 
 # ==========================================
-#  DASHBOARD
+# 🏠 DASHBOARD
 # ==========================================
 if page == "🏠 Dashboard":
     st.markdown("### 🎯 Project Overview")
@@ -205,20 +205,20 @@ if page == "🏠 Dashboard":
     """, unsafe_allow_html=True)
 
 # ==========================================
-# 📂 DATASET
+# 📂 DATASET (FIXED EMOJI HERE)
 # ==========================================
-elif page == " Dataset":
-    st.markdown("###  Dataset Overview & Preprocessing")
+elif page == "📂 Dataset":
+    st.markdown("### 📊 Dataset Overview & Preprocessing")
     st.write("Curated dental radiograph dataset with expert annotations, strictly processed for medical AI standards.")
     
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric(label=" Total Images", value="500+", delta="Curated")
+    with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
-    with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
+    with col3: st.metric(label=" Cavity", value="150", delta="30%")
     with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ️ Class Distribution")
+    st.markdown("### ⚖️ Class Distribution")
     st.write("Medical datasets are inherently imbalanced. We applied **Class Weights** during training to prevent bias toward the majority class.")
     
     dist_data = pd.DataFrame({
@@ -275,7 +275,7 @@ elif page == " Dataset":
     with step4:
         st.markdown("""
         <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">4️⃣</h3>
+            <h3 style="color: #FFFFFF; margin: 0;">4️</h3>
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Normalization<br>[0, 1]</p>
         </div>
         """, unsafe_allow_html=True)
@@ -288,7 +288,7 @@ elif page == " Dataset":
         """)
 
 # ==========================================
-# 🧠 AI MODELS
+#  AI MODELS
 # ==========================================
 elif page == "🧠 AI Models":
     st.markdown("### 🏆 Model Rankings & Performance")
@@ -320,7 +320,7 @@ elif page == "🧠 AI Models":
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    st.markdown("###  Model Selection Criteria")
+    st.markdown("### 📋 Model Selection Criteria")
     st.markdown("""
     | Criteria | Baseline CNN | MobileNetV2 | ResNet50 |
     |---|---|---|---|
@@ -332,7 +332,7 @@ elif page == "🧠 AI Models":
     """)
 
 # ==========================================
-# 📈 RESULTS
+#  RESULTS
 # ==========================================
 elif page == "📈 Results":
     st.markdown("### 📊 Performance Evaluation & Threshold Optimization")
@@ -372,7 +372,7 @@ elif page == "📈 Results":
     st.plotly_chart(fig_metrics, use_container_width=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 🕸️ Radar Analysis")
+    st.markdown("### ️ Radar Analysis")
     st.write("Holistic view of model strengths across all evaluation dimensions.")
     
     fig_radar = go.Figure()
@@ -406,7 +406,7 @@ elif page == "📈 Results":
     """, unsafe_allow_html=True)
 
 # ==========================================
-# 🔬 AI DIAGNOSIS (PREDICTION TOOL)
+# 🔬 AI DIAGNOSIS (PREDICTION TOOL) (FIXED EMOJI HERE)
 # ==========================================
 elif page == "🔬 AI Diagnosis":
     st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
@@ -422,7 +422,7 @@ elif page == "🔬 AI Diagnosis":
     col1, col2 = st.columns([1, 2])
 
     with col1:
-        st.markdown("###  Upload Radiograph")
+        st.markdown("### 📤 Upload Radiograph")
         uploaded_file = st.file_uploader(
             "Drag & drop or click to upload", 
             type=["jpg", "jpeg", "png"],
@@ -451,7 +451,7 @@ elif page == "🔬 AI Diagnosis":
             st.image(image, caption="Uploaded Radiograph", use_column_width=True)
             
             # Simulate processing time
-            with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
+            with st.spinner(' Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
             with st.spinner('🧠 Step 2: Running CNN Inference...'):
                 time.sleep(0.4)
@@ -584,7 +584,7 @@ elif page == "ℹ️ About":
         
         st.markdown("<br>", unsafe_allow_html=True)
         
-        st.markdown("#### 👨‍ Supervision")
+        st.markdown("#### 👨‍🏫 Supervision")
         st.markdown("""
         <div style='line-height: 2.2;'>
         <b>Main Supervisor:</b> Mr Chua Hiang Kiat<br>
