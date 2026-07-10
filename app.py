@@ -14,7 +14,7 @@ import random
 # ==========================================
 st.set_page_config(
     page_title="AI Dental Caries Detection System", 
-    page_icon="🦷", 
+    page_icon="", 
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -134,12 +134,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# SIDEBAR NAVIGATION
+# SIDEBAR NAVIGATION (PERFECTLY MATCHED EMOJIS)
 # ==========================================
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", " Results", "🔬 AI Diagnosis", "️ About"],
+    ["🏠 Dashboard", " Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
     label_visibility="collapsed",
     index=0
 )
@@ -156,7 +156,7 @@ if page == "🏠 Dashboard":
     """)
     
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 🌍 Burden of Disease")
+    st.markdown("###  Burden of Disease")
     c1, c2, c3 = st.columns(3)
     
     with c1:
@@ -198,7 +198,7 @@ if page == "🏠 Dashboard":
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("""
     <div class="info-box">
-    <strong>️ Clinical Disclaimer:</strong> This system is designed as an <strong>educational and assistive prototype</strong> 
+    <strong>⚠️ Clinical Disclaimer:</strong> This system is designed as an <strong>educational and assistive prototype</strong> 
     for Final Year Project demonstration purposes. It does <strong>not</strong> replace professional clinical judgment, 
     radiographic interpretation, or established diagnostic protocols. Always verify AI findings with qualified dental practitioners.
     </div>
@@ -212,13 +212,13 @@ elif page == "📂 Dataset":
     st.write("Curated dental radiograph dataset with expert annotations, strictly processed for medical AI standards.")
     
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric(label=" Total Images", value="500+", delta="Curated")
+    with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
-    with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
+    with col4: st.metric(label=" Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ️ Class Distribution")
+    st.markdown("### ⚖️ Class Distribution")
     st.write("Medical datasets are inherently imbalanced. We applied **Class Weights** during training to prevent bias toward the majority class.")
     
     dist_data = pd.DataFrame({
@@ -268,7 +268,7 @@ elif page == "📂 Dataset":
     with step3:
         st.markdown("""
         <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">3️⃣</h3>
+            <h3 style="color: #FFFFFF; margin: 0;">3️</h3>
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Resize<br>224×224</p>
         </div>
         """, unsafe_allow_html=True)
@@ -283,7 +283,7 @@ elif page == "📂 Dataset":
     # Added spacing before the expander
     st.markdown("<br><br>", unsafe_allow_html=True)
     
-    with st.expander("️ Why CLAHE is Critical for Dental X-Rays"):
+    with st.expander("ℹ️ Why CLAHE is Critical for Dental X-Rays"):
         st.markdown("""
         **Contrast Limited Adaptive Histogram Equalization (CLAHE)** enhances local contrast without amplifying noise. 
         Early caries appear as subtle radiolucent (dark) regions. CLAHE selectively brightens these boundaries, 
@@ -294,7 +294,7 @@ elif page == "📂 Dataset":
 # 🧠 AI MODELS
 # ==========================================
 elif page == " AI Models":
-    st.markdown("### 🏆 Model Rankings & Performance")
+    st.markdown("###  Model Rankings & Performance")
     st.write("Three architectures were rigorously evaluated and ranked based on F1-Score (clinical relevance).")
     
     st.markdown("#### 🥇 Top 1: MobileNetV2 (Winner)")
@@ -317,7 +317,7 @@ elif page == " AI Models":
     st.markdown("""
     <div class="warning-box">
     <strong>Custom 3-layer ConvNet</strong><br>
-    Achieved 83.6% accuracy but 0% Recall. This is the "Accuracy Paradox", the model simply learned to predict "No Cavity" for every image to maximize accuracy, completely failing to detect the disease.
+    Achieved 83.6% accuracy but 0% Recall. This is the "Accuracy Paradox"—the model simply learned to predict "No Cavity" for every image to maximize accuracy, completely failing to detect the disease.
     </div>
     """, unsafe_allow_html=True)
     
@@ -349,7 +349,7 @@ elif page == "📈 Results":
         'F1-Score': [0.000, 0.188, 0.065]
     })
 
-    st.markdown("### 📈 Multi-Metric Comparison")
+    st.markdown("###  Multi-Metric Comparison")
     fig_metrics = go.Figure()
     for metric in ['Accuracy', 'Precision', 'Recall', 'F1-Score']:
         fig_metrics.add_trace(go.Bar(
@@ -377,10 +377,9 @@ elif page == "📈 Results":
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### 🕸️ Radar Analysis")
     
-    # Explanation for non-data science users
     st.markdown("""
     <div class="info-box">
-    <strong>📖 How to Read the Radar Chart:</strong><br>
+    <strong> How to Read the Radar Chart:</strong><br>
     This radar chart provides a <strong>holistic view</strong> of each model's performance across all evaluation metrics simultaneously.
     <br><br>
     <strong>How it works:</strong>
@@ -432,7 +431,6 @@ elif page == "📈 Results":
     </div>
     """, unsafe_allow_html=True)
 
-    # Metrics Explanation Expander
     with st.expander("📊 Understanding Evaluation Metrics"):
         st.markdown("""
         **🎯 Accuracy**: Overall correctness of predictions (Total Correct / Total Predictions)
@@ -443,17 +441,16 @@ elif page == "📈 Results":
         
         **🎯 F1-Score**: Harmonic mean of Precision and Recall. Balances both metrics for a comprehensive evaluation.
         
-        ** Threshold**: The probability cutoff (0.35) used to classify predictions. Lower threshold = more sensitive detection.
+        **🎯 Threshold**: The probability cutoff (0.35) used to classify predictions. Lower threshold = more sensitive detection.
         """)
 
 # ==========================================
 # 🔬 AI DIAGNOSIS (PREDICTION TOOL)
 # ==========================================
 elif page == "🔬 AI Diagnosis":
-    st.markdown("###  Real-Time AI Diagnostic Assistant")
+    st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
     st.write("Upload a dental radiograph for instant analysis, confidence scoring, and explainable heatmap visualization.")
 
-    # TensorFlow Fallback Logic (Hidden from UI)
     try:
         import tensorflow as tf
         TF_AVAILABLE = True
@@ -470,7 +467,6 @@ elif page == "🔬 AI Diagnosis":
             help="Periapical, bitewing, or panoramic dental radiograph"
         )
         
-        # Hidden Model Loading Logic
         if TF_AVAILABLE:
             @st.cache_resource
             def load_model():
@@ -486,12 +482,10 @@ elif page == "🔬 AI Diagnosis":
 
     with col2:
         if uploaded_file is not None:
-            # Open image with PIL
             from PIL import Image
             image = Image.open(uploaded_file)
             st.image(image, caption="Uploaded Radiograph", use_column_width=True)
             
-            # Simulate processing time
             with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
             with st.spinner('🧠 Step 2: Running CNN Inference...'):
@@ -500,7 +494,6 @@ elif page == "🔬 AI Diagnosis":
                 time.sleep(0.4)
                 
                 if TF_AVAILABLE:
-                    # REAL AI PREDICTION (Localhost)
                     import cv2
                     img_array = np.array(image)
                     if len(img_array.shape) == 3:
@@ -544,7 +537,6 @@ elif page == "🔬 AI Diagnosis":
                     else:
                         heatmap_img = image
                 else:
-                    # DEMO MODE (Streamlit Cloud)
                     prediction_prob = np.random.uniform(0.35, 0.85)
                     heatmap_img = image.copy().convert('RGB').resize((224, 224))
                     overlay = Image.new('RGBA', (224, 224), (0, 0, 0, 0))
@@ -555,7 +547,6 @@ elif page == "🔬 AI Diagnosis":
                     overlay = overlay.filter(ImageFilter.GaussianBlur(radius=15))
                     heatmap_img = Image.alpha_composite(heatmap_img.convert('RGBA'), overlay).convert('RGB')
             
-            # Determine result
             OPTIMAL_THRESHOLD = 0.35
             is_cavity = prediction_prob >= OPTIMAL_THRESHOLD
             confidence = prediction_prob if is_cavity else (1 - prediction_prob)
@@ -567,7 +558,7 @@ elif page == "🔬 AI Diagnosis":
             
             with diag_col:
                 if is_cavity:
-                    st.error(f" **CARIES DETECTED** \n\n Confidence: {confidence*100:.1f}%")
+                    st.error(f"🚨 **CARIES DETECTED** \n\n Confidence: {confidence*100:.1f}%")
                     st.markdown("""
                     <div class="warning-box">
                     <strong>Clinical Recommendation:</strong> AI identified radiolucent patterns consistent with dental caries. 
@@ -606,12 +597,12 @@ elif page == "🔬 AI Diagnosis":
 # ==========================================
 # ℹ️ ABOUT
 # ==========================================
-elif page == "ℹ️ About":
-    st.markdown("### ℹ️ Project Information & References")
+elif page == "️ About":
+    st.markdown("### ️ Project Information & References")
     
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown("#### 👨💻 Developer")
+        st.markdown("#### 👨‍💻 Developer")
         st.markdown("""
         <div style='line-height: 2.2;'>
         <b>Name:</b> Barry Ng Kee Hong<br>
@@ -623,7 +614,7 @@ elif page == "ℹ️ About":
         
         st.markdown("<br>", unsafe_allow_html=True)
         
-        st.markdown("#### 👨🏫 Supervision")
+        st.markdown("#### 👨‍🏫 Supervision")
         st.markdown("""
         <div style='line-height: 2.2;'>
         <b>Main Supervisor:</b> Mr Chua Hiang Kiat<br>
@@ -654,7 +645,7 @@ elif page == "ℹ️ About":
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("""
     <div class="info-box">
-    <strong>️ Clinical Disclaimer:</strong> This system is designed as an <strong>educational and assistive prototype</strong> 
+    <strong>⚠️ Clinical Disclaimer:</strong> This system is designed as an <strong>educational and assistive prototype</strong> 
     for Final Year Project demonstration purposes. It does <strong>not</strong> replace professional clinical judgment, 
     radiographic interpretation, or established diagnostic protocols. Always verify AI findings with qualified dental practitioners.
     </div>
@@ -666,7 +657,7 @@ elif page == "ℹ️ About":
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center; color: #64748B; padding: 20px; border-top: 1px solid #334155; margin-top: 40px; font-size: 14px;'>
-    <p> Automated Detection of Dental Caries from Dental X-ray Images | FYP2 2024</p>
+    <p>🦷 Automated Detection of Dental Caries from Dental X-ray Images | FYP2 2024</p>
     <p>Developed by Barry Ng Kee Hong (0135374) | University of Wollongong Malaysia</p>
 </div>
 """, unsafe_allow_html=True)
