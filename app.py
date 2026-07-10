@@ -279,6 +279,7 @@ elif page == "📂 Dataset":
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Normalization<br>[0, 1]</p>
         </div>
         """, unsafe_allow_html=True)
+        
 
     with st.expander("ℹ️ Why CLAHE is Critical for Dental X-Rays"):
         st.markdown("""
