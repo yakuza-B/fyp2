@@ -21,12 +21,9 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* Force LIGHT text on dark background */
     h1, h2, h3, h4, h5, h6, p, div, span, label, strong, b {
         color: #FFFFFF !important;
     }
-    
-    /* App Header */
     .app-header {
         text-align: center;
         padding: 20px 0 10px 0;
@@ -43,8 +40,6 @@ st.markdown("""
         color: #94A3B8 !important;
         margin: 5px 0 0 0 !important;
     }
-    
-    /* Metric Cards (Dark Gradient) */
     .stat-card {
         background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
         padding: 20px;
@@ -71,8 +66,6 @@ st.markdown("""
         color: #FFFFFF !important;
         margin: 0 !important;
     }
-    
-    /* Info & Alert Boxes (Dark Mode) */
     .info-box {
         background-color: #1E293B;
         border-left: 5px solid #3B82F6;
@@ -103,8 +96,6 @@ st.markdown("""
         line-height: 1.6;
         color: #E2E8F0 !important;
     }
-    
-    /* Pipeline Steps (Dark Mode) */
     .pipeline-step {
         background-color: #1E293B;
         border: 2px solid #3B82F6;
@@ -115,8 +106,6 @@ st.markdown("""
         color: #FFFFFF !important;
         box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    
-    /* Hide Streamlit branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     .stDeployButton {display:none;}
@@ -134,20 +123,30 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# SIDEBAR NAVIGATION (PERFECTLY MATCHED EMOJIS)
+# PAGE VARIABLES (THIS FIXES THE MISSING PAGES BUG)
+# ==========================================
+PAGE_DASHBOARD = "🏠 Dashboard"
+PAGE_DATASET = "📂 Dataset"
+PAGE_MODELS = "🧠 AI Models"
+PAGE_RESULTS = "📈 Results"
+PAGE_DIAGNOSIS = "🔬 AI Diagnosis"
+PAGE_ABOUT = "ℹ️ About"
+
+# ==========================================
+# SIDEBAR NAVIGATION
 # ==========================================
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
+    [PAGE_DASHBOARD, PAGE_DATASET, PAGE_MODELS, PAGE_RESULTS, PAGE_DIAGNOSIS, PAGE_ABOUT],
     label_visibility="collapsed",
     index=0
 )
 
 # ==========================================
-#  DASHBOARD
+# 🏠 DASHBOARD
 # ==========================================
-if page == "🏠 Dashboard":
+if page == PAGE_DASHBOARD:
     st.markdown("### 🎯 Project Overview")
     st.markdown("""
     Dental caries (tooth decay) is a global health crisis affecting **2.3 billion people worldwide**. In Malaysia, adult prevalence sits at **85.1%**, with early-stage lesions frequently missed due to subjective manual interpretation and practitioner fatigue.
@@ -160,28 +159,11 @@ if page == "🏠 Dashboard":
     c1, c2, c3 = st.columns(3)
     
     with c1:
-        st.markdown("""
-        <div class="stat-card">
-            <h3>Global Cases</h3>
-            <p>2.3B+</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
+        st.markdown('<div class="stat-card"><h3>Global Cases</h3><p>2.3B+</p></div>', unsafe_allow_html=True)
     with c2:
-        st.markdown("""
-        <div class="stat-card">
-            <h3>Malaysia Adults</h3>
-            <p>85.1%</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
+        st.markdown('<div class="stat-card"><h3>Malaysia Adults</h3><p>85.1%</p></div>', unsafe_allow_html=True)
     with c3:
-        st.markdown("""
-        <div class="stat-card">
-            <h3>Malaysia Kids</h3>
-            <p>71.3%</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="stat-card"><h3>Malaysia Kids</h3><p>71.3%</p></div>', unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### 🧠 Quick Knowledge Check")
@@ -207,18 +189,18 @@ if page == "🏠 Dashboard":
 # ==========================================
 # 📂 DATASET
 # ==========================================
-elif page == " Dataset":
-    st.markdown("###  Dataset Overview & Preprocessing")
+elif page == PAGE_DATASET:
+    st.markdown("### 📊 Dataset Overview & Preprocessing")
     st.write("Curated dental radiograph dataset with expert annotations, strictly processed for medical AI standards.")
     
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric(label=" Total Images", value="500+", delta="Curated")
+    with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
-    with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
+    with col3: st.metric(label=" Cavity", value="150", delta="30%")
     with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ️ Class Distribution")
+    st.markdown("### ⚖️ Class Distribution")
     st.write("Medical datasets are inherently imbalanced. We applied **Class Weights** during training to prevent bias toward the majority class.")
     
     dist_data = pd.DataFrame({
@@ -252,35 +234,15 @@ elif page == " Dataset":
     
     step1, step2, step3, step4 = st.columns(4)
     with step1:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">1️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Grayscale<br>Conversion</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step"><h3 style="color: #FFFFFF; margin: 0;">1️⃣</h3><p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Grayscale<br>Conversion</p></div>', unsafe_allow_html=True)
     with step2:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">2️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">CLAHE<br>Enhancement</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step"><h3 style="color: #FFFFFF; margin: 0;">2️⃣</h3><p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">CLAHE<br>Enhancement</p></div>', unsafe_allow_html=True)
     with step3:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">3️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Resize<br>224×224</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step"><h3 style="color: #FFFFFF; margin: 0;">3️⃣</h3><p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Resize<br>224×224</p></div>', unsafe_allow_html=True)
     with step4:
-        st.markdown("""
-        <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">4️⃣</h3>
-            <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Normalization<br>[0, 1]</p>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="pipeline-step"><h3 style="color: #FFFFFF; margin: 0;">4️⃣</h3><p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Normalization<br>[0, 1]</p></div>', unsafe_allow_html=True)
 
-    # ADDED SPACING HERE BEFORE THE EXPANDER
+    # ADDED SPACING BEFORE EXPANDER
     st.markdown("<br><br>", unsafe_allow_html=True)
     
     with st.expander("ℹ️ Why CLAHE is Critical for Dental X-Rays"):
@@ -293,7 +255,7 @@ elif page == " Dataset":
 # ==========================================
 # 🧠 AI MODELS
 # ==========================================
-elif page == "🧠 AI Models":
+elif page == PAGE_MODELS:
     st.markdown("### 🏆 Model Rankings & Performance")
     st.write("Three architectures were rigorously evaluated and ranked based on F1-Score (clinical relevance).")
     
@@ -305,7 +267,7 @@ elif page == "🧠 AI Models":
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("####  Top 2: ResNet50")
+    st.markdown("#### 🥈 Top 2: ResNet50")
     st.markdown("""
     <div class="info-box">
     <strong>Deep Transfer Learning Architecture</strong><br>
@@ -313,7 +275,7 @@ elif page == "🧠 AI Models":
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("#### 🥉 Top 3: Baseline CNN (Failed)")
+    st.markdown("####  Top 3: Baseline CNN (Failed)")
     st.markdown("""
     <div class="warning-box">
     <strong>Custom 3-layer ConvNet</strong><br>
@@ -323,7 +285,7 @@ elif page == "🧠 AI Models":
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    st.markdown("###  Model Selection Criteria")
+    st.markdown("### 📋 Model Selection Criteria")
     st.markdown("""
     | Criteria | Baseline CNN | MobileNetV2 | ResNet50 |
     |---|---|---|---|
@@ -337,8 +299,8 @@ elif page == "🧠 AI Models":
 # ==========================================
 # 📈 RESULTS
 # ==========================================
-elif page == " Results":
-    st.markdown("###  Performance Evaluation & Threshold Optimization")
+elif page == PAGE_RESULTS:
+    st.markdown("### 📊 Performance Evaluation & Threshold Optimization")
     st.write("Comprehensive metric analysis to ensure clinical safety and diagnostic reliability.")
 
     model_results = pd.DataFrame({
@@ -349,7 +311,7 @@ elif page == " Results":
         'F1-Score': [0.000, 0.188, 0.065]
     })
 
-    st.markdown("### 📈 Multi-Metric Comparison")
+    st.markdown("###  Multi-Metric Comparison")
     fig_metrics = go.Figure()
     for metric in ['Accuracy', 'Precision', 'Recall', 'F1-Score']:
         fig_metrics.add_trace(go.Bar(
@@ -375,7 +337,7 @@ elif page == " Results":
     st.plotly_chart(fig_metrics, use_container_width=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ️ Radar Analysis")
+    st.markdown("### 🕸️ Radar Analysis")
     
     st.markdown("""
     <div class="info-box">
@@ -435,19 +397,19 @@ elif page == " Results":
         st.markdown("""
         **🎯 Accuracy**: Overall correctness of predictions (Total Correct / Total Predictions)
         
-        ** Precision**: Of all predicted cavities, how many were actually cavities? (True Positives / (True Positives + False Positives))
+        **🎯 Precision**: Of all predicted cavities, how many were actually cavities? (True Positives / (True Positives + False Positives))
         
-        ** Recall (Sensitivity)**: Of all actual cavities, how many did we detect? (True Positives / (True Positives + False Negatives))
+        **🎯 Recall (Sensitivity)**: Of all actual cavities, how many did we detect? (True Positives / (True Positives + False Negatives))
         
         **🎯 F1-Score**: Harmonic mean of Precision and Recall. Balances both metrics for a comprehensive evaluation.
         
-        **🎯 Threshold**: The probability cutoff (0.35) used to classify predictions. Lower threshold = more sensitive detection.
+        ** Threshold**: The probability cutoff (0.35) used to classify predictions. Lower threshold = more sensitive detection.
         """)
 
 # ==========================================
 # 🔬 AI DIAGNOSIS (PREDICTION TOOL)
 # ==========================================
-elif page == "🔬 AI Diagnosis":
+elif page == PAGE_DIAGNOSIS:
     st.markdown("### 🩺 Real-Time AI Diagnostic Assistant")
     st.write("Upload a dental radiograph for instant analysis, confidence scoring, and explainable heatmap visualization.")
 
@@ -460,7 +422,7 @@ elif page == "🔬 AI Diagnosis":
     col1, col2 = st.columns([1, 2])
 
     with col1:
-        st.markdown("###  Upload Radiograph")
+        st.markdown("### 📤 Upload Radiograph")
         uploaded_file = st.file_uploader(
             "Drag & drop or click to upload", 
             type=["jpg", "jpeg", "png"],
@@ -488,7 +450,7 @@ elif page == "🔬 AI Diagnosis":
             
             with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
                 time.sleep(0.4)
-            with st.spinner('🧠 Step 2: Running CNN Inference...'):
+            with st.spinner(' Step 2: Running CNN Inference...'):
                 time.sleep(0.4)
             with st.spinner('🔥 Step 3: Generating Grad-CAM Heatmap...'):
                 time.sleep(0.4)
@@ -552,7 +514,7 @@ elif page == "🔬 AI Diagnosis":
             confidence = prediction_prob if is_cavity else (1 - prediction_prob)
             
             st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown("### 🩺 Diagnostic Report")
+            st.markdown("###  Diagnostic Report")
             
             diag_col, cam_col = st.columns(2)
             
@@ -592,12 +554,12 @@ elif page == "🔬 AI Diagnosis":
             </div>
             """, unsafe_allow_html=True)
             
-            st.info("👆 Upload a radiograph to begin analysis.")
+            st.info(" Upload a radiograph to begin analysis.")
 
 # ==========================================
 # ℹ️ ABOUT
 # ==========================================
-elif page == "ℹ️ About":
+elif page == PAGE_ABOUT:
     st.markdown("### ℹ️ Project Information & References")
     
     col1, col2 = st.columns(2)
@@ -614,7 +576,7 @@ elif page == "ℹ️ About":
         
         st.markdown("<br>", unsafe_allow_html=True)
         
-        st.markdown("#### 👨‍ Supervision")
+        st.markdown("#### 👨‍🏫 Supervision")
         st.markdown("""
         <div style='line-height: 2.2;'>
         <b>Main Supervisor:</b> Mr Chua Hiang Kiat<br>
@@ -623,7 +585,7 @@ elif page == "ℹ️ About":
         """, unsafe_allow_html=True)
         
     with col2:
-        st.markdown("#### ️ Technology Stack")
+        st.markdown("#### 🛠️ Technology Stack")
         st.markdown("""
         - **Language:** Python 3.11
         - **Deep Learning:** TensorFlow 2.15, Keras
