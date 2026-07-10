@@ -14,7 +14,7 @@ import random
 # ==========================================
 st.set_page_config(
     page_title="AI Dental Caries Detection System", 
-    page_icon="", 
+    page_icon="🦷", 
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -139,13 +139,13 @@ st.markdown("""
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to", 
-    ["🏠 Dashboard", " Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
+    ["🏠 Dashboard", "📂 Dataset", "🧠 AI Models", "📈 Results", "🔬 AI Diagnosis", "ℹ️ About"],
     label_visibility="collapsed",
     index=0
 )
 
 # ==========================================
-# 🏠 DASHBOARD
+#  DASHBOARD
 # ==========================================
 if page == "🏠 Dashboard":
     st.markdown("### 🎯 Project Overview")
@@ -156,7 +156,7 @@ if page == "🏠 Dashboard":
     """)
     
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("###  Burden of Disease")
+    st.markdown("### 🌍 Burden of Disease")
     c1, c2, c3 = st.columns(3)
     
     with c1:
@@ -207,18 +207,18 @@ if page == "🏠 Dashboard":
 # ==========================================
 # 📂 DATASET
 # ==========================================
-elif page == "📂 Dataset":
-    st.markdown("### 📊 Dataset Overview & Preprocessing")
+elif page == " Dataset":
+    st.markdown("###  Dataset Overview & Preprocessing")
     st.write("Curated dental radiograph dataset with expert annotations, strictly processed for medical AI standards.")
     
     col1, col2, col3, col4 = st.columns(4)
-    with col1: st.metric(label="📷 Total Images", value="500+", delta="Curated")
+    with col1: st.metric(label=" Total Images", value="500+", delta="Curated")
     with col2: st.metric(label="✅ Healthy", value="350", delta="70%")
     with col3: st.metric(label="🦠 Cavity", value="150", delta="30%")
-    with col4: st.metric(label=" Resolution", value="224x224", delta="Pixels")
+    with col4: st.metric(label="📏 Resolution", value="224x224", delta="Pixels")
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### ⚖️ Class Distribution")
+    st.markdown("### ️ Class Distribution")
     st.write("Medical datasets are inherently imbalanced. We applied **Class Weights** during training to prevent bias toward the majority class.")
     
     dist_data = pd.DataFrame({
@@ -268,7 +268,7 @@ elif page == "📂 Dataset":
     with step3:
         st.markdown("""
         <div class="pipeline-step">
-            <h3 style="color: #FFFFFF; margin: 0;">3️</h3>
+            <h3 style="color: #FFFFFF; margin: 0;">3️⃣</h3>
             <p style="margin: 10px 0; font-weight: 600; color: #FFFFFF;">Resize<br>224×224</p>
         </div>
         """, unsafe_allow_html=True)
@@ -280,7 +280,7 @@ elif page == "📂 Dataset":
         </div>
         """, unsafe_allow_html=True)
 
-    # Added spacing before the expander
+    # ADDED SPACING HERE BEFORE THE EXPANDER
     st.markdown("<br><br>", unsafe_allow_html=True)
     
     with st.expander("ℹ️ Why CLAHE is Critical for Dental X-Rays"):
@@ -293,8 +293,8 @@ elif page == "📂 Dataset":
 # ==========================================
 # 🧠 AI MODELS
 # ==========================================
-elif page == " AI Models":
-    st.markdown("###  Model Rankings & Performance")
+elif page == "🧠 AI Models":
+    st.markdown("### 🏆 Model Rankings & Performance")
     st.write("Three architectures were rigorously evaluated and ranked based on F1-Score (clinical relevance).")
     
     st.markdown("#### 🥇 Top 1: MobileNetV2 (Winner)")
@@ -305,7 +305,7 @@ elif page == " AI Models":
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("#### 🥈 Top 2: ResNet50")
+    st.markdown("####  Top 2: ResNet50")
     st.markdown("""
     <div class="info-box">
     <strong>Deep Transfer Learning Architecture</strong><br>
@@ -323,7 +323,7 @@ elif page == " AI Models":
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    st.markdown("### 📋 Model Selection Criteria")
+    st.markdown("###  Model Selection Criteria")
     st.markdown("""
     | Criteria | Baseline CNN | MobileNetV2 | ResNet50 |
     |---|---|---|---|
@@ -337,8 +337,8 @@ elif page == " AI Models":
 # ==========================================
 # 📈 RESULTS
 # ==========================================
-elif page == "📈 Results":
-    st.markdown("### 📊 Performance Evaluation & Threshold Optimization")
+elif page == " Results":
+    st.markdown("###  Performance Evaluation & Threshold Optimization")
     st.write("Comprehensive metric analysis to ensure clinical safety and diagnostic reliability.")
 
     model_results = pd.DataFrame({
@@ -349,7 +349,7 @@ elif page == "📈 Results":
         'F1-Score': [0.000, 0.188, 0.065]
     })
 
-    st.markdown("###  Multi-Metric Comparison")
+    st.markdown("### 📈 Multi-Metric Comparison")
     fig_metrics = go.Figure()
     for metric in ['Accuracy', 'Precision', 'Recall', 'F1-Score']:
         fig_metrics.add_trace(go.Bar(
@@ -375,11 +375,11 @@ elif page == "📈 Results":
     st.plotly_chart(fig_metrics, use_container_width=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("### 🕸️ Radar Analysis")
+    st.markdown("### ️ Radar Analysis")
     
     st.markdown("""
     <div class="info-box">
-    <strong> How to Read the Radar Chart:</strong><br>
+    <strong>📖 How to Read the Radar Chart:</strong><br>
     This radar chart provides a <strong>holistic view</strong> of each model's performance across all evaluation metrics simultaneously.
     <br><br>
     <strong>How it works:</strong>
@@ -435,9 +435,9 @@ elif page == "📈 Results":
         st.markdown("""
         **🎯 Accuracy**: Overall correctness of predictions (Total Correct / Total Predictions)
         
-        **🎯 Precision**: Of all predicted cavities, how many were actually cavities? (True Positives / (True Positives + False Positives))
+        ** Precision**: Of all predicted cavities, how many were actually cavities? (True Positives / (True Positives + False Positives))
         
-        **🎯 Recall (Sensitivity)**: Of all actual cavities, how many did we detect? (True Positives / (True Positives + False Negatives))
+        ** Recall (Sensitivity)**: Of all actual cavities, how many did we detect? (True Positives / (True Positives + False Negatives))
         
         **🎯 F1-Score**: Harmonic mean of Precision and Recall. Balances both metrics for a comprehensive evaluation.
         
@@ -460,7 +460,7 @@ elif page == "🔬 AI Diagnosis":
     col1, col2 = st.columns([1, 2])
 
     with col1:
-        st.markdown("### 📤 Upload Radiograph")
+        st.markdown("###  Upload Radiograph")
         uploaded_file = st.file_uploader(
             "Drag & drop or click to upload", 
             type=["jpg", "jpeg", "png"],
@@ -597,8 +597,8 @@ elif page == "🔬 AI Diagnosis":
 # ==========================================
 # ℹ️ ABOUT
 # ==========================================
-elif page == "️ About":
-    st.markdown("### ️ Project Information & References")
+elif page == "ℹ️ About":
+    st.markdown("### ℹ️ Project Information & References")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -614,7 +614,7 @@ elif page == "️ About":
         
         st.markdown("<br>", unsafe_allow_html=True)
         
-        st.markdown("#### 👨‍🏫 Supervision")
+        st.markdown("#### 👨‍ Supervision")
         st.markdown("""
         <div style='line-height: 2.2;'>
         <b>Main Supervisor:</b> Mr Chua Hiang Kiat<br>
@@ -623,7 +623,7 @@ elif page == "️ About":
         """, unsafe_allow_html=True)
         
     with col2:
-        st.markdown("#### 🛠️ Technology Stack")
+        st.markdown("#### ️ Technology Stack")
         st.markdown("""
         - **Language:** Python 3.11
         - **Deep Learning:** TensorFlow 2.15, Keras
@@ -634,7 +634,7 @@ elif page == "️ About":
         """)
         
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("####  Key References")
+    st.markdown("#### 📚 Key References")
     st.markdown("""
     1. World Health Organization. (2022). *Global Oral Health Status Report*.
     2. National Oral Health Survey of Adults (NOHSA). (2020). *Malaysia Ministry of Health*.
@@ -657,7 +657,7 @@ elif page == "️ About":
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center; color: #64748B; padding: 20px; border-top: 1px solid #334155; margin-top: 40px; font-size: 14px;'>
-    <p>🦷 Automated Detection of Dental Caries from Dental X-ray Images | FYP2 2024</p>
+    <p> Automated Detection of Dental Caries from Dental X-ray Images | FYP2 2024</p>
     <p>Developed by Barry Ng Kee Hong (0135374) | University of Wollongong Malaysia</p>
 </div>
 """, unsafe_allow_html=True)
