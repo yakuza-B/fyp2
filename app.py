@@ -134,7 +134,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# SIDEBAR NAVIGATION (FIXED - ALL EMOJIS ADDED)
+# SIDEBAR NAVIGATION
 # ==========================================
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
@@ -314,7 +314,7 @@ elif page == "🧠 AI Models":
     st.markdown("""
     <div class="warning-box">
     <strong>Custom 3-layer ConvNet</strong><br>
-    Achieved 83.6% accuracy but 0% Recall. This is the "Accuracy Paradox", the model simply learned to predict "No Cavity" for every image to maximize accuracy, completely failing to detect the disease.
+    Achieved 83.6% accuracy but 0% Recall. This is the "Accuracy Paradox"—the model simply learned to predict "No Cavity" for every image to maximize accuracy, completely failing to detect the disease.
     </div>
     """, unsafe_allow_html=True)
     
@@ -373,7 +373,31 @@ elif page == "📈 Results":
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### 🕸️ Radar Analysis")
-    st.write("Holistic view of model strengths across all evaluation dimensions.")
+    
+    # Explanation for non-data science users
+    st.markdown("""
+    <div class="info-box">
+    <strong>📖 How to Read the Radar Chart:</strong><br>
+    This radar chart provides a <strong>holistic view</strong> of each model's performance across all evaluation metrics simultaneously.
+    <br><br>
+    <strong>How it works:</strong>
+    <ul>
+        <li><strong>Each corner</strong> represents a different performance metric (Accuracy, Precision, Recall, F1-Score)</li>
+        <li><strong>Each colored shape</strong> represents one AI model</li>
+        <li><strong>Larger area</strong> = Better overall performance across all metrics</li>
+        <li><strong>Shape closer to outer edge</strong> = Higher score (closer to 100%)</li>
+    </ul>
+    <br>
+    <strong>What the results tell us:</strong>
+    <ul>
+        <li><strong>MobileNetV2 (Green)</strong> has the most balanced performance - it detects cavities reasonably well while maintaining decent accuracy</li>
+        <li><strong>Baseline CNN (Blue)</strong> appears large but this is misleading - it has high accuracy but ZERO ability to detect cavities (0% Recall)</li>
+        <li><strong>ResNet50 (Red)</strong> shows poor performance across all metrics, indicating it struggled to learn from our dataset</li>
+    </ul>
+    <br>
+    <strong>Why this matters:</strong> In medical diagnosis, we need models that perform well across ALL metrics, not just accuracy. A model that misses cavities (low recall) is dangerous, even if it's "accurate" overall.
+    </div>
+    """, unsafe_allow_html=True)
     
     fig_radar = go.Figure()
     for model_name in model_results['Model']:
@@ -462,7 +486,7 @@ elif page == "🔬 AI Diagnosis":
             # Open image with PIL
             from PIL import Image
             image = Image.open(uploaded_file)
-            st.image(image, caption="Uploaded Radiograph", use_column_width=True)
+            st.image(image, caption="Uploaded Radiograph", use_container_width=True)
             
             # Simulate processing time
             with st.spinner('🔍 Step 1: Applying CLAHE Enhancement...'):
@@ -558,7 +582,7 @@ elif page == "🔬 AI Diagnosis":
                     
             with cam_col:
                 st.markdown("#### 🔥 Explainable AI Overlay")
-                st.image(heatmap_img, caption="Grad-CAM Attention Heatmap (Red = High Focus)", use_column_width=True)
+                st.image(heatmap_img, caption="Grad-CAM Attention Heatmap (Red = High Focus)", use_container_width=True)
                 if not TF_AVAILABLE:
                     st.caption("*Note: Heatmap simulated for cloud demonstration. Localhost uses real Grad-CAM.*")
 
@@ -605,7 +629,7 @@ elif page == "ℹ️ About":
         """, unsafe_allow_html=True)
         
     with col2:
-        st.markdown("#### 🛠️ Technology ")
+        st.markdown("#### 🛠️ Technology Stack")
         st.markdown("""
         - **Language:** Python 3.11
         - **Deep Learning:** TensorFlow 2.15, Keras
