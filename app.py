@@ -280,7 +280,6 @@ elif page == "📂 Dataset":
         </div>
         """, unsafe_allow_html=True)
         
-
     with st.expander("ℹ️ Why CLAHE is Critical for Dental X-Rays"):
         st.markdown("""
         **Contrast Limited Adaptive Histogram Equalization (CLAHE)** enhances local contrast without amplifying noise. 
