@@ -279,7 +279,7 @@ elif page == PAGE_MODELS:
     st.markdown("""
     <div class="warning-box">
     <strong>Custom 3-layer ConvNet</strong><br>
-    Achieved 83.6% accuracy but 0% Recall. This is the "Accuracy Paradox"—the model simply learned to predict "No Cavity" for every image to maximize accuracy, completely failing to detect the disease.
+    Achieved 83.6% accuracy but 0% Recall. This is the "Accuracy Paradox", the model simply learned to predict "No Cavity" for every image to maximize accuracy, completely failing to detect the disease.
     </div>
     """, unsafe_allow_html=True)
     
